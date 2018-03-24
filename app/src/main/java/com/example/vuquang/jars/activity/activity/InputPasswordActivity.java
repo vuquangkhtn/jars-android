@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.app.Common;
 import com.example.vuquang.jars.activity.app.JarsApp;
+import com.example.vuquang.jars.activity.main.MainActivity;
 import com.example.vuquang.jars.activity.utils.SharePrefHelper;
 
 /**

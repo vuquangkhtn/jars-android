@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.example.vuquang.jars.R;
+import com.example.vuquang.jars.activity.main.MainActivity;
 import com.example.vuquang.jars.activity.utils.SharePrefHelper;
 
 /**
