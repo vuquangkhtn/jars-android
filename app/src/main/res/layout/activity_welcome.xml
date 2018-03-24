@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="@dimen/d200"
+        android:layout_height="@dimen/d140"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/d80"
+        android:background="@drawable/logo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/d30"
+        android:layout_marginLeft="@dimen/d15"
+        android:layout_marginRight="@dimen/d15"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/d12"
+            android:layout_gravity=""
+            android:text="The best app for book management"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/d16"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/user_input"
+            android:layout_width="match_parent"
+            android:hint="Username"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/d12" />
+        <Button
+            android:id="@+id/btn_login"
+            style="@style/OrangeButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/d15"
+            android:text="Login" />
+
+        <TextView
+            android:id="@+id/tv_create_new_acc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Register new account"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="@dimen/d17" />
+
+    </LinearLayout>
+
+</RelativeLayout>

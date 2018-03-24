@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_book"
+            android:title="Book" />
+
+        <item
+            android:id="@+id/nav_author"
+            android:title="Author" />
+        <item
+            android:id="@+id/nav_favor"
+            android:title="Favorite" />
+    </group>
+    <group android:id="@+id/nav_footer">
+        <item
+            android:id="@+id/nav_sign_out"
+            android:title="Sign out" />
+    </group>
+
+</menu>
