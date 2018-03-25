@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/tv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/d90"
+        android:textColor="@android:color/white"
+        android:text="@string/company_name"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_logo"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/d20"
+        android:textColor="@android:color/white"
+        android:text="@string/sologan"
+        />
+</RelativeLayout>

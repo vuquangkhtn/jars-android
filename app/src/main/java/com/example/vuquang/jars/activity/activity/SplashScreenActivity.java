@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
+import com.example.vuquang.jars.activity.app.JarsApp;
 import com.example.vuquang.jars.activity.main.MainActivity;
 import com.example.vuquang.jars.activity.utils.SharePrefHelper;
 
@@ -14,10 +16,16 @@ import com.example.vuquang.jars.activity.utils.SharePrefHelper;
  */
 
 public class SplashScreenActivity extends NotAuthenAcitivity {
+    private TextView tvLogo;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        tvLogo = findViewById(R.id.tv_logo);
+        tvLogo.setTypeface(JarsApp.getApp().getTypeFaceLogo());
+
         processLogin();
     }
 

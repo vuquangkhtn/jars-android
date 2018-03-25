@@ -2,7 +2,13 @@ package com.example.vuquang.jars.activity.app;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.ImageFormat;
+import android.graphics.Typeface;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.vuquang.jars.activity.activity.WelcomeActivity;
 import com.example.vuquang.jars.activity.model.Account;
@@ -51,4 +57,9 @@ public class JarsApp extends Application{
         Intent logoutIntent = new Intent("ACTION_LOGOUT");
         sendBroadcast(logoutIntent);
     }
+
+    public Typeface getTypeFaceLogo() {
+        return Typeface.createFromAsset(getAssets(),  "fonts/atvice.ttf");
+    }
+
 }

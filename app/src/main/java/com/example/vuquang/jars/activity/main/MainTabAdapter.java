@@ -59,8 +59,8 @@ public class MainTabAdapter extends FragmentPagerAdapter {
     }
 
     enum FragmentType {
-        REALITY_JAR_FRAGMENT_POSITION("Reality Jar", R.drawable.ic_reality),
-        THEORY_JAR_FRAGMENT_POSITION("Theory Jar", R.drawable.ic_theory);
+        REALITY_JAR_FRAGMENT_POSITION("Reality Jar", R.drawable.tab_ic_reality),
+        THEORY_JAR_FRAGMENT_POSITION("Theory Jar", R.drawable.tab_ic_theory);
 
         private String title;
 

@@ -4,5 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="orange_button">#F27A10</color>
+    <color name="hint_color">#BDBDBD</color>
+    <color name="primary">#142029</color>
 </resources>

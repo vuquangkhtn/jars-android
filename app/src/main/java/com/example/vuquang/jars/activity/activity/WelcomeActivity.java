@@ -12,11 +12,14 @@ import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.app.Common;
+import com.example.vuquang.jars.activity.app.JarsApp;
+
 
 public class WelcomeActivity extends AppCompatActivity {
     private EditText mPhoneInputEdt;
     private Button mBtnLogin;
     private TextView mTvCreateAcc;
+    private TextView tvLogo;
 
     String phoneNum;
 
@@ -24,6 +27,9 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        tvLogo = findViewById(R.id.tv_logo);
+        tvLogo.setTypeface(JarsApp.getApp().getTypeFaceLogo());
 
         mBtnLogin = (Button) findViewById(R.id.btn_login);
         mBtnLogin.setOnClickListener(new View.OnClickListener() {

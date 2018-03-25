@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <ImageView
-        android:layout_width="@dimen/d200"
-        android:layout_height="@dimen/d140"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/d80"
-        android:background="@drawable/logo" />
-
+        android:id="@+id/imv_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/layout_logo"/>
+    </FrameLayout>
 </RelativeLayout>
