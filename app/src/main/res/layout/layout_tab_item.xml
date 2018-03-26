@@ -37,6 +37,6 @@
         android:layout_marginLeft="10dp"
         android:gravity="center"
         android:textColor="@drawable/tab_text_color"
-        android:textSize="20dp" />
+        android:textSize="@dimen/d16" />
 
 </LinearLayout>

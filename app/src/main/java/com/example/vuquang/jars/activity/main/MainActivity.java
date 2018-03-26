@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.app.JarsApp;
+import com.example.vuquang.jars.activity.utils.SharePrefHelper;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private ImageButton imbMenu;
-    private TextView txtName;
+    private TextView txtTitle, txtName;
 
     ViewPager mViewPager;
     MainTabAdapter mTabAdapter;
@@ -33,11 +34,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        txtName = findViewById(R.id.tv_title);
+        txtTitle = findViewById(R.id.tv_title);
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
 
         navHeader = navigationView.getHeaderView(0);
+        txtName = navHeader.findViewById(R.id.name);
 
         imbMenu = findViewById(R.id.imv_navi_menu);
         imbMenu.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +95,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadNavHeader() {
         // name, website
-        txtName.setText(mTabAdapter.getPageTitle(mViewPager.getCurrentItem()));
+        txtTitle.setText(mTabAdapter.getPageTitle(mViewPager.getCurrentItem()));
+        txtName.setText(SharePrefHelper.get().getString("username_pref"));
 
     }
 
