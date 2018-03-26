@@ -46,7 +46,7 @@
             android:layout_marginBottom="@dimen/d12" />
         <Button
             android:id="@+id/btn_login"
-            android:background="@drawable/button_round"
+            android:background="@drawable/button_round_blue"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/d60"

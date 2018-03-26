@@ -24,7 +24,7 @@ public class SplashScreenActivity extends NotAuthenAcitivity {
         setContentView(R.layout.activity_splash);
 
         tvLogo = findViewById(R.id.tv_logo);
-        tvLogo.setTypeface(JarsApp.getApp().getTypeFaceLogo());
+        tvLogo.setTypeface(JarsApp.getApp().getTypeFace("fonts/atvice.ttf"));
 
         processLogin();
     }

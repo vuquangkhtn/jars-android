@@ -2,19 +2,19 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="@color/primary">
+    android:background="@android:color/holo_blue_light">
 
     <ImageButton
         android:id="@+id/imv_navi_menu"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:background="@color/primary"
+        android:background="@android:color/holo_blue_light"
         android:src="@drawable/ic_menu" />
     <ImageButton
         android:id="@+id/imv_navi_back"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:background="@color/primary"
+        android:background="@android:color/holo_blue_light"
         android:src="@drawable/ic_back" />
 
     <TextView

@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/layout_main_action_bar"/>
+        <include layout="@layout/layout_action_bar"/>
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -25,12 +25,9 @@
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
                 android:background="@color/primary"
-                app:tabIndicatorColor="@android:color/holo_blue_light"
-                app:tabMaxWidth="0dp"
-                app:tabGravity="fill"
-                app:tabMode="fixed" />
+                app:tabIndicatorColor="@android:color/holo_blue_light" />
 
             <com.example.vuquang.jars.activity.main.NoSwipeViewPager
                 android:id="@+id/view_pager"

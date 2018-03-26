@@ -29,7 +29,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         tvLogo = findViewById(R.id.tv_logo);
-        tvLogo.setTypeface(JarsApp.getApp().getTypeFaceLogo());
+        tvLogo.setTypeface(JarsApp.getApp().getTypeFace("fonts/atvice.ttf"));
 
         mBtnLogin = (Button) findViewById(R.id.btn_login);
         mBtnLogin.setOnClickListener(new View.OnClickListener() {

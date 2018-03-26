@@ -58,8 +58,8 @@ public class JarsApp extends Application{
         sendBroadcast(logoutIntent);
     }
 
-    public Typeface getTypeFaceLogo() {
-        return Typeface.createFromAsset(getAssets(),  "fonts/atvice.ttf");
+    public Typeface getTypeFace(String path) {
+        return Typeface.createFromAsset(getAssets(),  path);
     }
 
 }

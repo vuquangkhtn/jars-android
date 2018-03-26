@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private View navHeader;
     private DrawerLayout drawer;
     private NavigationView navigationView;
-    private ImageButton imbMenu;
+    private ImageButton imbMenu, imbBack;
     private TextView txtTitle, txtName;
 
     ViewPager mViewPager;
@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
         navHeader = navigationView.getHeaderView(0);
         txtName = navHeader.findViewById(R.id.name);
 
+        imbBack = findViewById(R.id.imv_navi_back);
+        imbBack.setVisibility(View.GONE);
+
         imbMenu = findViewById(R.id.imv_navi_menu);
         imbMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,22 +59,22 @@ public class MainActivity extends AppCompatActivity {
 
         mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
         mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                loadNavHeader();
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+//        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+////                txtTitle.setText(tab.getText());
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
+//            }
+//        });
 
         // Iterate over all tabs and set the custom view
         for (int i = 0; i < mTabLayout.getTabCount(); i++) {
@@ -95,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadNavHeader() {
         // name, website
-        txtTitle.setText(mTabAdapter.getPageTitle(mViewPager.getCurrentItem()));
+        txtTitle.setText("JARS");
         txtName.setText(SharePrefHelper.get().getString("username_pref"));
 
     }

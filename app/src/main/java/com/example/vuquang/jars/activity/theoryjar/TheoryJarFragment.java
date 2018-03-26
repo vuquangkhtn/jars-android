@@ -5,8 +5,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
+import com.example.vuquang.jars.activity.app.JarsApp;
 
 /**
  * Created by VuQuang on 3/24/2018.
@@ -14,12 +16,13 @@ import com.example.vuquang.jars.R;
 
 public class TheoryJarFragment extends Fragment {
 
-    public TheoryJarFragment() {
-        // Required empty public constructor
-    }
+    private TextView tvTotal;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_theory_jar, container, false);
+        View view = View.inflate(getActivity(), R.layout.fragment_theory_jar, null);
+        tvTotal = view.findViewById(R.id.tv_total);
+        tvTotal.setTypeface(JarsApp.getApp().getTypeFace("fonts/lane.ttf"));
+        return view;
     }
 }

@@ -14,12 +14,6 @@ import com.example.vuquang.jars.R;
  */
 public class RealityJarFragment extends Fragment {
 
-
-    public RealityJarFragment() {
-        // Required empty public constructor
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
