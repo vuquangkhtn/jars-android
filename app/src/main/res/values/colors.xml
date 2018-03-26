@@ -6,4 +6,6 @@
 
     <color name="hint_color">#BDBDBD</color>
     <color name="primary">#142029</color>
+    <color name="background_color">#E2E9EE</color>
+    <color name="text_color">#757575</color>
 </resources>

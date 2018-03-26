@@ -25,7 +25,7 @@
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
                 android:background="@color/primary"
                 app:tabIndicatorColor="@android:color/holo_blue_light" />
 

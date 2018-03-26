@@ -10,9 +10,14 @@ import android.graphics.Typeface;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.activity.WelcomeActivity;
 import com.example.vuquang.jars.activity.model.Account;
+import com.example.vuquang.jars.activity.theoryjar.model.Jar;
 import com.example.vuquang.jars.activity.utils.SharePrefHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by VuQuang on 3/24/2018.
@@ -60,6 +65,19 @@ public class JarsApp extends Application{
 
     public Typeface getTypeFace(String path) {
         return Typeface.createFromAsset(getAssets(),  path);
+    }
+
+    public List<Jar> initListJar(long total) {
+        List<Jar> listJar = new ArrayList<>();
+        String name[] = {"FFA","LTSS","EDU","NEC","Play","Give"};
+        float ratio[] = {0.1f,0.1f,0.05f,0.55f,0.1f,0.1f};
+        int resIcon[] = {R.drawable.ic_theory_jar_highlight,R.drawable.ic_theory_jar_highlight,
+                R.drawable.ic_theory_jar_highlight,R.drawable.ic_theory_jar_highlight,
+                R.drawable.ic_theory_jar_highlight,R.drawable.ic_theory_jar_highlight,};
+        for (int i=0;i<name.length;i++) {
+            listJar.add(new Jar(resIcon[i],name[i],Math.round(total*ratio[i]), ratio[i]));
+        }
+        return listJar;
     }
 
 }
