@@ -26,4 +26,11 @@
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="22dp" />
+    <ImageButton
+        android:id="@+id/imv_navi_help"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="end"
+        android:background="@android:color/holo_blue_light"
+        android:src="@drawable/ic_help" />
 </FrameLayout>

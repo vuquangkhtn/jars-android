@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.app.JarsApp;
+import com.example.vuquang.jars.activity.fragments.HelpFragment;
 import com.example.vuquang.jars.activity.utils.SharePrefHelper;
 
 
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private View navHeader;
     private DrawerLayout drawer;
     private NavigationView navigationView;
-    private ImageButton imbMenu, imbBack;
+    private ImageButton imbMenu, imbBack, imbHelp;
     private TextView txtTitle, txtName;
 
     ViewPager mViewPager;
@@ -49,6 +51,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openDrawer();
+            }
+        });
+
+        imbHelp = findViewById(R.id.imv_navi_help);
+        imbHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openHelpFragmennt();
             }
         });
 
@@ -85,6 +95,10 @@ public class MainActivity extends AppCompatActivity {
         loadNavHeader();
 
         setUpNavigationView();
+    }
+
+    private void openHelpFragmennt() {
+        HelpFragment.show(getSupportFragmentManager());
     }
 
 

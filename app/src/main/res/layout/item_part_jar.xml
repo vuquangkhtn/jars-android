@@ -14,8 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_width="@dimen/d70"
         android:layout_height="match_parent"
-        android:layout_marginRight="15dp"
-        android:background="@color/colorPrimary" />
+        android:layout_marginRight="15dp" />
     <LinearLayout
         android:layout_toRightOf="@id/imv_icon"
         android:orientation="vertical"

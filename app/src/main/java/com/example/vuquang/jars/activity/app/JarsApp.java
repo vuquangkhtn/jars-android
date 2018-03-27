@@ -71,9 +71,9 @@ public class JarsApp extends Application{
         List<Jar> listJar = new ArrayList<>();
         String name[] = {"FFA","LTSS","EDU","NEC","Play","Give"};
         float ratio[] = {0.1f,0.1f,0.05f,0.55f,0.1f,0.1f};
-        int resIcon[] = {R.drawable.ic_theory_jar_highlight,R.drawable.ic_theory_jar_highlight,
-                R.drawable.ic_theory_jar_highlight,R.drawable.ic_theory_jar_highlight,
-                R.drawable.ic_theory_jar_highlight,R.drawable.ic_theory_jar_highlight,};
+        int resIcon[] = {R.drawable.ic_jar,R.drawable.ic_jar,
+                R.drawable.ic_jar,R.drawable.ic_jar,
+                R.drawable.ic_jar,R.drawable.ic_jar,};
         for (int i=0;i<name.length;i++) {
             listJar.add(new Jar(resIcon[i],name[i],Math.round(total*ratio[i]), ratio[i]));
         }

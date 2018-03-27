@@ -23,16 +23,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/hint_color"
-                android:text="Total price"
+                android:text="Total savings"
                 android:textAllCaps="true"
                 android:textSize="16sp"/>
-            <TextView
-                android:id="@+id/tv_total"
+
+            <EditText
+                android:id="@+id/edit_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
                 android:text="400 000 000"
-                android:textSize="50sp"/>
+                android:textCursorDrawable="@null"
+                android:backgroundTint="@color/primary"
+                android:singleLine="true"
+                android:textSize="40sp"/>
         </LinearLayout>
     </FrameLayout>
     <android.support.v7.widget.RecyclerView

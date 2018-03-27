@@ -43,6 +43,8 @@
             android:textColorHint="@color/hint_color"
             android:backgroundTint="@color/hint_color"
             android:layout_height="wrap_content"
+            android:textCursorDrawable="@null"
+            android:singleLine="true"
             android:layout_marginBottom="@dimen/d12" />
         <Button
             android:id="@+id/btn_login"
