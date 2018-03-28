@@ -1,4 +1,4 @@
-package com.example.vuquang.jars.activity.theoryjar.adapter;
+package com.example.vuquang.jars.activity.theorytab.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
-import com.example.vuquang.jars.activity.theoryjar.model.Jar;
+import com.example.vuquang.jars.activity.model.Jar;
 
 import java.util.List;
 

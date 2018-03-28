@@ -2,18 +2,13 @@ package com.example.vuquang.jars.activity.app;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.ImageFormat;
 import android.graphics.Typeface;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.activity.WelcomeActivity;
 import com.example.vuquang.jars.activity.model.Account;
-import com.example.vuquang.jars.activity.theoryjar.model.Jar;
+import com.example.vuquang.jars.activity.model.Jar;
 import com.example.vuquang.jars.activity.utils.SharePrefHelper;
 
 import java.util.ArrayList;
@@ -69,13 +64,9 @@ public class JarsApp extends Application{
 
     public List<Jar> initListJar(long total) {
         List<Jar> listJar = new ArrayList<>();
-        String name[] = {"FFA","LTSS","EDU","NEC","Play","Give"};
-        float ratio[] = {0.1f,0.1f,0.05f,0.55f,0.1f,0.1f};
-        int resIcon[] = {R.drawable.ic_jar,R.drawable.ic_jar,
-                R.drawable.ic_jar,R.drawable.ic_jar,
-                R.drawable.ic_jar,R.drawable.ic_jar,};
-        for (int i=0;i<name.length;i++) {
-            listJar.add(new Jar(resIcon[i],name[i],Math.round(total*ratio[i]), ratio[i]));
+        Jar.JarType[] jarTypes = Jar.JarType.values();
+        for (Jar.JarType type:jarTypes) {
+            listJar.add(Jar.initJar(type, total));
         }
         return listJar;
     }

@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
-import com.example.vuquang.jars.activity.realityjar.RealityJarFragment;
-import com.example.vuquang.jars.activity.theoryjar.TheoryJarFragment;
+import com.example.vuquang.jars.activity.realitytab.RealityFragment;
+import com.example.vuquang.jars.activity.theorytab.TheoryFragment;
 
 /**
  * Created by CPU10584-local on 17-Jan-18.
@@ -32,9 +32,9 @@ public class MainTabAdapter extends FragmentPagerAdapter {
         FragmentType type = listTabs[position];
         switch (type) {
             case THEORY_JAR_FRAGMENT_POSITION:
-                return new TheoryJarFragment();
+                return new TheoryFragment();
             case REALITY_JAR_FRAGMENT_POSITION:
-                return new RealityJarFragment();
+                return new RealityFragment();
         }
         return null;
     }

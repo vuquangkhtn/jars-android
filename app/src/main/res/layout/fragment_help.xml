@@ -32,11 +32,11 @@
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/font_size_12"
-                    android:text="Necessity account (NEC – 55%)"/>
+                    android:text="@string/nec_jar_name"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="  This account is for managing your everyday expenses and bills. This would include things like your rent, mortgage, utilities, bills, taxes, food, clothes, etc. Basically it includes anything that you need to live, the necessities."/>
+                    android:text="@string/nec_jar_content"/>
 
             </LinearLayout>
 
@@ -54,11 +54,11 @@
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/font_size_12"
-                    android:text="Financial freedom account (FFA – 10%)"/>
+                    android:text="@string/ffa_jar_name"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="  This is your golden goose. Therefore this jar is your ticket to financial freedom. The money that you put into this jar is used for investments and building your passive income streams. You never spend this money. The only time you would spend this money is once you become financially free. Even then you would only spend the returns on your investment. Never spend the principal."/>
+                    android:text="@string/ffa_jar_content"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="@dimen/d5"
@@ -74,11 +74,11 @@
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/font_size_12"
-                    android:text="Education account (EDU – 10%)"/>
+                    android:text="@string/edu_jar_name"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="  Money in this jar is meant to further your education and personal growth. Since you are your most valuable asset, an investment in yourself is a great way to use your money. I have used education money to purchase books, CDs, courses or anything else that has educational value."/>
+                    android:text="@string/edu_jar_content"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="@dimen/d5"
@@ -94,11 +94,11 @@
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/font_size_12"
-                    android:text="Long-term saving for spending account (LTSS – 10%)"/>
+                    android:text="@string/ltss_jar_name"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="  The money in this jar is for the bigger nice to have purchases. As a result, my wife and I have used the money from this account to go skiing in The Rockies in Whistler, BC. We also used this money last September for our trip to Italy and Switzerland. The only reason we’ve been able to make this happen is because we’ve accumulated a nice sum each month in our LTSS. A small monthly contribution can go a long way."/>
+                    android:text="@string/ltss_jar_content"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="@dimen/d5"
@@ -114,11 +114,11 @@
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/font_size_12"
-                    android:text="Play account (PLAY – 10%)"/>
+                    android:text="@string/play_jar_name"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="  This is my favorite account. PLAY money is spent every month on purchases you wouldn’t normally make. The purpose of this jar is to nurture yourself. You could purchase an expensive bottle of wine at dinner, get a massage or go on a weekend getaway. Play can be anything your heart desires. My wife and I each receive our own play money, and here’s the best part. We’re not allowed to ask what the other person spends their money on."/>
+                    android:text="@string/play_jar_content"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_margin="@dimen/d5"
@@ -132,11 +132,11 @@
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/font_size_12"
-                    android:text="Give Account (GIVE – 5%)"/>
+                    android:text="@string/give_jar_name"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="  Finally, the money in this account is for giving away. In addition, we use the money in this jar to give to family and friends on birthdays, special occasions and holidays. You can also give away your time as opposed to giving away money. You could house sit for a neighbor, take a friends dog for a walk or volunteer in your community."/>
+                    android:text="@string/give_jar_content"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

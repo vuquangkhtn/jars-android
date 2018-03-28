@@ -20,19 +20,19 @@ import com.example.vuquang.jars.R;
  * Created by VuQuang on 3/27/2018.
  */
 
-public class HelpFragment extends DialogFragment {
-    private static final String TAG = "HelpFragment";
+public class HelpDialogFragment extends DialogFragment {
+    private static final String TAG = "HelpDialogFragment";
 
     private ImageButton imbMenu, imbBack, imbHelp;
 
     public static void show(FragmentManager fm) {
-        HelpFragment dialog = newInstance();
+        HelpDialogFragment dialog = newInstance();
         dialog.show(fm,TAG);
     }
 
-    private static HelpFragment newInstance() {
+    private static HelpDialogFragment newInstance() {
         Bundle args = new Bundle();
-        HelpFragment dialog = new HelpFragment();
+        HelpDialogFragment dialog = new HelpDialogFragment();
         dialog.setArguments(args);
         return dialog;
     }

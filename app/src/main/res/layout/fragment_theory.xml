@@ -36,6 +36,7 @@
                 android:textCursorDrawable="@null"
                 android:backgroundTint="@color/primary"
                 android:singleLine="true"
+                android:inputType="number"
                 android:textSize="40sp"/>
         </LinearLayout>
     </FrameLayout>
