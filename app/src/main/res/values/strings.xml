@@ -6,6 +6,8 @@
     <string name="company_name">POW</string>
     <string name="sologan">Easy. Helpful. For Everyone</string>
 
+    <string name="first_tab_name">Expenses</string>
+    <string name="sencond_tab_name">Statistic</string>
     <string name="nec_jar_name">Necessity account (NEC – 55%)</string>
     <string name="ffa_jar_name">Financial freedom account (FFA – 10%)</string>
     <string name="edu_jar_name">Education account (EDU – 10%)</string>

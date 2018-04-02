@@ -1,4 +1,4 @@
-package com.example.vuquang.jars.activity.theorytab;
+package com.example.vuquang.jars.activity.statistics;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -17,13 +17,13 @@ import android.widget.EditText;
 
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.app.JarsApp;
-import com.example.vuquang.jars.activity.theorytab.adapter.JarAdapter;
+import com.example.vuquang.jars.activity.statistics.adapter.JarAdapter;
 
 /**
  * Created by VuQuang on 3/24/2018.
  */
 
-public class TheoryFragment extends Fragment {
+public class StatisticsFragment extends Fragment {
 
     private EditText editTotal;
 
@@ -32,7 +32,7 @@ public class TheoryFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = View.inflate(getActivity(), R.layout.fragment_theory, null);
+        View view = View.inflate(getActivity(), R.layout.fragment_statistics, null);
         editTotal = view.findViewById(R.id.edit_total);
         editTotal.setTypeface(JarsApp.getApp().getTypeFace("fonts/lane.ttf"));
         editTotal.addTextChangedListener(new TextWatcher() {

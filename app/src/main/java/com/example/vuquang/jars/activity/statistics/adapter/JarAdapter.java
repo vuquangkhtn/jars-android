@@ -1,4 +1,4 @@
-package com.example.vuquang.jars.activity.theorytab.adapter;
+package com.example.vuquang.jars.activity.statistics.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

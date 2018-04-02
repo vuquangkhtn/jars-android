@@ -1,4 +1,4 @@
-package com.example.vuquang.jars.activity.realitytab;
+package com.example.vuquang.jars.activity.expenses;
 
 
 import android.os.Bundle;
@@ -12,13 +12,13 @@ import com.example.vuquang.jars.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RealityFragment extends Fragment {
+public class ExpensesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reality, container, false);
+        return inflater.inflate(R.layout.fragment_expenses, container, false);
     }
 
 }
