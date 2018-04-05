@@ -20,20 +20,13 @@ import java.util.List;
 
 public class JarsApp extends Application{
     private static JarsApp instance;
-
-//    private RequestQueue mRequestQueue;
-//    private Cache mCache;
-
     private Account mAccount;
+    public long totalAmount;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
-
-//        this.mCache = new DiskBasedCache(getCacheDir("main"), (getMainDiskCacheSizeInMb() * 1024) * 1024);
-//        this.mRequestQueue = new RequestQueue(this.mCache, createNetwork(), 20);
-//        this.mRequestQueue.start();
 
         mAccount = new Account();
 

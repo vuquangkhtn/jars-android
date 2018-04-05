@@ -2,6 +2,8 @@ package com.example.vuquang.jars.activity.model;
 
 import com.example.vuquang.jars.R;
 
+import java.io.Serializable;
+
 /**
  * Created by CPU10584-local on 26-Mar-18.
  */
@@ -22,7 +24,6 @@ public class Jar {
 
     public static Jar initJar(JarType type, long total) {
 
-        long defaultAmount = 0;
         String nameList[] = {"FFA","LTSS","EDU","NEC","Play","Give"};
         float ratioList[] = {0.1f,0.1f,0.05f,0.55f,0.1f,0.1f};
         int resIconList[] = {R.drawable.ic_jar,R.drawable.ic_jar,
@@ -54,12 +55,16 @@ public class Jar {
         }
     }
 
-    public enum JarType {
-        NEC,
+    public String getTitle() {
+        return String.format("%s (%d)",name, Math.round(ratio));
+    }
+
+    public enum JarType implements Serializable {
         FFA,
-        EDU,
         LTSS,
+        EDU,
+        NEC,
         PLAY,
-        GIVE;
+        GIVE
     }
 }
