@@ -22,48 +22,34 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/d30"
         android:layout_marginLeft="@dimen/d15"
         android:layout_marginRight="@dimen/d15"
         android:orientation="vertical">
-
-
+        <Button
+            android:id="@+id/btn_online_mode"
+            android:background="@drawable/button_custom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/d20"
+            android:textColor="@android:color/white"
+            android:text="ONLINE MODE" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/d12"
-            android:text="App for finance management"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/d16"/>
-        <EditText
-            android:id="@+id/user_input"
-            android:layout_width="match_parent"
-            android:hint="Username"
-            android:textColor="@android:color/white"
-            android:textColorHint="@color/hint_color"
-            android:backgroundTint="@color/hint_color"
-            android:layout_height="wrap_content"
-            android:textCursorDrawable="@null"
-            android:singleLine="true"
-            android:layout_marginBottom="@dimen/d12" />
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/d20"
+            android:textColor="@color/hint_color"
+            android:textSize="@dimen/font_size_15"
+            android:text="or"/>
         <Button
-            android:id="@+id/btn_login"
-            android:background="@drawable/button_round_blue"
+            android:id="@+id/btn_offline_mode"
+            android:background="@drawable/button_custom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/d60"
             android:textColor="@android:color/white"
-            android:text="Login" />
-
-
-        <TextView
-            android:id="@+id/tv_create_new_acc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="SIGN UP"
-            android:textColor="@color/hint_color"
-            android:textSize="@dimen/d17" />
+            android:enabled="false"
+            android:text="Offline Mode" />
 
     </LinearLayout>
 
