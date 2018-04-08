@@ -100,8 +100,8 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public void onBackPressed() {
-        JarsApp.getApp().logout(LoginActivity.this);
-    }
+//    @Override
+//    public void onBackPressed() {
+//        JarsApp.getApp().logout(LoginActivity.this);
+//    }
 }
