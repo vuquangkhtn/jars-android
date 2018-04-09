@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.app.JarsApp;
+import com.example.vuquang.jars.activity.main.MainActivity;
 import com.example.vuquang.jars.activity.userlogin.model.AccessMode;
 import com.example.vuquang.jars.activity.utils.SharePrefHelper;
 
@@ -34,7 +35,6 @@ public class WelcomeActivity extends AppCompatActivity {
         mBtnOffline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestAccessMode(AccessMode.OFFLINE);
                 goToMain(AccessMode.OFFLINE);
             }
         });
@@ -43,14 +43,9 @@ public class WelcomeActivity extends AppCompatActivity {
         mBtnOnline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestAccessMode(AccessMode.ONLINE);
                 goToLogin();
             }
         });
-    }
-
-    private void requestAccessMode(AccessMode mode) {
-        SharePrefHelper.get().setString("access_pref", mode.getMode());
     }
 
     private void goToLogin() {
@@ -60,11 +55,16 @@ public class WelcomeActivity extends AppCompatActivity {
         finish();
     }
 
+    private void requestAccessMode(AccessMode mode) {
+        SharePrefHelper.get().setString("access_pref", mode.getMode());
+    }
+
     private void goToMain(AccessMode mode) {
-//        Intent i = new Intent(this, MainActivity.class);
-//        startActivity(i);
-//        sendBroadcast(new Intent(NotAuthenAcitivity.ACTION_LOGIN));
-//        finish();
+        requestAccessMode(mode);
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        sendBroadcast(new Intent(NotAuthenAcitivity.ACTION_LOGIN));
+        finish();
     }
 
 }

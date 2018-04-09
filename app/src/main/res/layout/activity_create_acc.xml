@@ -17,7 +17,7 @@
         android:textSize="@dimen/font_size_15"
         android:textColor="@android:color/white"
         android:textAlignment="center"
-        android:text="Welcome back!"/>
+        android:text="Create an account"/>
     <ImageView
         android:id="@+id/imv_navi_back"
         android:layout_width="@dimen/d30"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/d50"
+        android:layout_marginBottom="@dimen/d80"
         android:layout_marginLeft="@dimen/d15"
         android:layout_marginRight="@dimen/d15"
         android:orientation="vertical">
@@ -62,31 +62,49 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:layout_marginBottom="@dimen/d12" />
+
+        <EditText
+            android:id="@+id/edt_confirm_password"
+            android:layout_width="match_parent"
+            android:hint="Confirm Password"
+            android:textAlignment="center"
+            android:inputType="textPassword"
+            android:textCursorDrawable="@null"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/hint_color"
+            android:backgroundTint="@color/hint_color"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_marginBottom="@dimen/d12" />
+        <EditText
+            android:id="@+id/edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:textAlignment="center"
+            android:inputType="textWebEmailAddress"
+            android:textCursorDrawable="@null"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/hint_color"
+            android:backgroundTint="@color/hint_color"
+            android:singleLine="true"
+            android:layout_marginBottom="@dimen/d12" />
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_create_account"
             android:background="@drawable/button_custom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/d30"
-            android:textColor="@android:color/white"
-            android:text="Login" />
-        <Button
-            android:id="@+id/btn_create_account"
-            android:background="@drawable/bg_btn_transparent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/d30"
-            android:layout_marginBottom="@dimen/d60"
+            android:layout_marginBottom="@dimen/d10"
             android:textColor="@android:color/white"
             android:text="Create an account" />
         <TextView
-            android:id="@+id/tv_forgot_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Forgot password?"
+            android:text="@string/policy"
             android:textColor="@color/hint_color"
-            android:textSize="@dimen/font_size_13" />
+            android:textSize="@dimen/font_size_12" />
 
     </LinearLayout>
 

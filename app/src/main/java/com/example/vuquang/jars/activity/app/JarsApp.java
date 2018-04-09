@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 
 import com.example.vuquang.jars.activity.userlogin.WelcomeActivity;
+import com.example.vuquang.jars.activity.utils.Pref;
 import com.example.vuquang.jars.activity.utils.SharePrefHelper;
 
 /**
@@ -30,8 +31,9 @@ public class JarsApp extends Application{
     }
 
     public void logout(Activity currentActivity) {
-        SharePrefHelper.get().setString("username_pref", "");
-        SharePrefHelper.get().setString("password_pref", "");
+        SharePrefHelper.get().setString(Pref.access_pref,"");
+        SharePrefHelper.get().setString(Pref.username_pref, "");
+        SharePrefHelper.get().setString(Pref.password_pref, "");
         Intent i = new Intent(currentActivity, WelcomeActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);

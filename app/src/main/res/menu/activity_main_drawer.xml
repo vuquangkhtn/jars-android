@@ -4,14 +4,17 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_expenses"
+            android:icon="@drawable/ic_expenses"
             android:title="Expenses" />
         <item
             android:id="@+id/nav_statistics"
+            android:icon="@drawable/ic_statistics"
             android:title="Statistics" />
     </group>
     <group android:id="@+id/nav_footer">
         <item
             android:id="@+id/nav_sign_out"
+            android:icon="@drawable/ic_close"
             android:title="Sign out" />
     </group>
 

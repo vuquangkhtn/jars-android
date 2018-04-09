@@ -48,7 +48,6 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/d60"
             android:textColor="@android:color/white"
-            android:enabled="false"
             android:text="Offline Mode" />
 
     </LinearLayout>

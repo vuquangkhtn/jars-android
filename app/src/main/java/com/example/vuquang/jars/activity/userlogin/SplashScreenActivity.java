@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.app.JarsApp;
+import com.example.vuquang.jars.activity.main.MainActivity;
 import com.example.vuquang.jars.activity.userlogin.model.AccessMode;
 import com.example.vuquang.jars.activity.utils.Pref;
 import com.example.vuquang.jars.activity.utils.SharePrefHelper;
@@ -43,10 +44,7 @@ public class SplashScreenActivity extends NotAuthenAcitivity {
                 goToWelcomeActivity();
             }
         }
-
-
     }
-
 
     private void goToWelcomeActivity() {
         Intent intent = new Intent(this, WelcomeActivity.class);
@@ -54,10 +52,15 @@ public class SplashScreenActivity extends NotAuthenAcitivity {
         finish();
     }
 
+    private void requestAccessMode(AccessMode mode) {
+        SharePrefHelper.get().setString("access_pref", mode.getMode());
+    }
+
     private void goToMain(AccessMode mode) {
-//        Intent i = new Intent(this, MainActivity.class);
-//        startActivity(i);
-//        sendBroadcast(new Intent(NotAuthenAcitivity.ACTION_LOGIN));
-//        finish();
+        requestAccessMode(mode);
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        sendBroadcast(new Intent(NotAuthenAcitivity.ACTION_LOGIN));
+        finish();
     }
 }

@@ -5,6 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="company_name">POW</string>
     <string name="sologan">Easy. Helpful. For Everyone</string>
+    <string name="policy"><p>By creating an account you agree to our <br/><font color="white"> User Agreement</font> and <font color="white">Privacy policy</font></p></string>
 
     <string name="first_tab_name">Expenses</string>
     <string name="sencond_tab_name">Statistic</string>
