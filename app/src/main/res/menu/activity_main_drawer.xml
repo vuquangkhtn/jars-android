@@ -5,17 +5,21 @@
         <item
             android:id="@+id/nav_expenses"
             android:icon="@drawable/ic_expenses"
-            android:title="Expenses" />
+            android:title="@string/expenses_name" />
         <item
             android:id="@+id/nav_statistics"
             android:icon="@drawable/ic_statistics"
-            android:title="Statistics" />
+            android:title="@string/statistics_name" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings" />
     </group>
     <group android:id="@+id/nav_footer">
         <item
             android:id="@+id/nav_sign_out"
             android:icon="@drawable/ic_close"
-            android:title="Sign out" />
+            android:title="@string/sign_out" />
     </group>
 
 </menu>

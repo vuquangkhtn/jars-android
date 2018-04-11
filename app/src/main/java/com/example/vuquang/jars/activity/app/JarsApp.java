@@ -15,15 +15,15 @@ import com.example.vuquang.jars.activity.utils.SharePrefHelper;
 
 public class JarsApp extends Application{
     public static final String ACTION_LOGOUT = "ACTION_LOGOUT";
-
     private static JarsApp instance;
+
+    private long totalIncome = 10000;
+
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
-
 //        mAccount = new Account();
-
     }
 
     public static JarsApp getApp() {
@@ -50,4 +50,11 @@ public class JarsApp extends Application{
         return Typeface.createFromAsset(getAssets(),  path);
     }
 
+    public long getTotalIncome() {
+        return totalIncome;
+    }
+
+    public void setTotalIncome(long totalIncome) {
+        this.totalIncome = totalIncome;
+    }
 }

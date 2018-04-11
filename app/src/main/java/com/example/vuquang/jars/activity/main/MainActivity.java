@@ -72,6 +72,27 @@ public class MainActivity extends AppCompatActivity {
         });
 
         loadNavHeader();
+        setDefaultFragment(ExpensesFragment.class);
+
+    }
+
+    private void setDefaultFragment(Class fragmentClass) {
+        Fragment defaultFragment = null;
+        if(fragmentClass == ExpensesFragment.class) {
+            txtTitle.setText(getResources().getString(R.string.expenses_name));
+        } else {
+            txtTitle.setText(getResources().getString(R.string.statistics_name));
+        }
+        try {
+            defaultFragment = (Fragment) fragmentClass.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        // set default fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, defaultFragment).commit();
     }
 
     private void openHelpFragmennt() {
@@ -104,10 +125,12 @@ public class MainActivity extends AppCompatActivity {
             case ONLINE: {
                 layoutUser.setVisibility(View.VISIBLE);
                 layoutOffline.setVisibility(View.GONE);
+                mImvProfile.setImageResource(R.drawable.ic_user_test);
                 break;
             }
             case OFFLINE:
             default: {
+                mImvProfile.setImageResource(R.drawable.ic_profile);
                 layoutUser.setVisibility(View.GONE);
                 layoutOffline.setVisibility(View.VISIBLE);
                 layoutOffline.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +180,11 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        if(fragmentClass == ExpensesFragment.class) {
+            txtTitle.setText(getResources().getString(R.string.expenses_name));
+        } else {
+            txtTitle.setText(getResources().getString(R.string.statistics_name));
+        }
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();

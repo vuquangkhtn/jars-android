@@ -9,5 +9,6 @@ import java.util.List;
 
 public class MonthlyHistory {
     public Month month;
+    public long monthlyIncome;
     public List<Jar> jarList;
 }

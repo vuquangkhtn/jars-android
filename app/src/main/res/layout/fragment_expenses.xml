@@ -42,6 +42,6 @@
             android:layout_height="48dp"
             android:layout_gravity="end|bottom"
             android:src="@drawable/ic_add"
-            android:layout_margin="16dp" />
+            android:layout_margin="@dimen/d10" />
     </FrameLayout>
 </LinearLayout>

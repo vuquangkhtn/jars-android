@@ -15,9 +15,12 @@ public enum JarType {
     GIVE;
     public final static String nameList[] = {"FFA","LTSS","EDU","NEC","Play","Give"};
     public final static float ratioList[] = {0.1f,0.1f,0.05f,0.55f,0.1f,0.1f};
-    public final static int resIconList[] = {R.drawable.ic_jar,R.drawable.ic_jar,
-            R.drawable.ic_jar,R.drawable.ic_jar,
-            R.drawable.ic_jar, R.drawable.ic_jar,};
+    public final static int resIconList[] = {R.drawable.ic_ffa_jar,
+            R.drawable.ic_ltss_jar,
+            R.drawable.ic_edu_jar,
+            R.drawable.ic_nec_jar,
+            R.drawable.ic_play_jar,
+            R.drawable.ic_give_jar};
 
     private int id;
 

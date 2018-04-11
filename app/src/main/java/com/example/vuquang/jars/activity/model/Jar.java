@@ -29,4 +29,16 @@ public class Jar {
         return currentAmount;
     }
 
+    public String getName() {
+        return String.format("%s (%d%)",type.getName(),Math.round(type.getRatio()*100));
+    }
+
+    public int getResIcon() {
+        return type.getResIdIcon();
+    }
+
+    public float getRatio() {
+        return type.getRatio();
+    }
+
 }

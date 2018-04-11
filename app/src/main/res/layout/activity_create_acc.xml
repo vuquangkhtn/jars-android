@@ -17,7 +17,7 @@
         android:textSize="@dimen/font_size_15"
         android:textColor="@android:color/white"
         android:textAlignment="center"
-        android:text="Create an account"/>
+        android:text="@string/create_an_account"/>
     <ImageView
         android:id="@+id/imv_navi_back"
         android:layout_width="@dimen/d30"
@@ -25,6 +25,7 @@
         android:layout_margin="@dimen/d10"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:background="@drawable/ic_close"/>
     <LinearLayout
         android:layout_width="@dimen/d250"
@@ -39,7 +40,7 @@
             android:id="@+id/edt_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
+            android:hint="@string/user_name"
             android:textAlignment="center"
             android:inputType="text"
             android:textCursorDrawable="@null"
@@ -52,7 +53,7 @@
         <EditText
             android:id="@+id/edt_password"
             android:layout_width="match_parent"
-            android:hint="Password"
+            android:hint="@string/password"
             android:textAlignment="center"
             android:inputType="textPassword"
             android:textCursorDrawable="@null"
@@ -66,7 +67,7 @@
         <EditText
             android:id="@+id/edt_confirm_password"
             android:layout_width="match_parent"
-            android:hint="Confirm Password"
+            android:hint="@string/confirm_pass"
             android:textAlignment="center"
             android:inputType="textPassword"
             android:textCursorDrawable="@null"
@@ -80,7 +81,7 @@
             android:id="@+id/edt_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/email"
             android:textAlignment="center"
             android:inputType="textWebEmailAddress"
             android:textCursorDrawable="@null"
@@ -97,7 +98,7 @@
             android:layout_marginTop="@dimen/d30"
             android:layout_marginBottom="@dimen/d10"
             android:textColor="@android:color/white"
-            android:text="Create an account" />
+            android:text="@string/create_an_account" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
