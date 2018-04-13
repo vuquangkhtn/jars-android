@@ -16,6 +16,8 @@ import com.example.vuquang.jars.activity.model.Jar;
 import com.example.vuquang.jars.activity.model.MonthlyHistory;
 import com.example.vuquang.jars.activity.statistics.adapter.JarAdapter;
 
+import java.util.Calendar;
+
 /**
  * Created by CPU10584-local on 09-Apr-18.
  */
@@ -23,9 +25,11 @@ import com.example.vuquang.jars.activity.statistics.adapter.JarAdapter;
 public class StatisticsFragment extends Fragment {
     private RecyclerView rvListJar;
     private JarAdapter mJarAdapter;
-    private TextView mTvTotal;
-    private MonthlyHistory mCurrentHistory;
-
+    private TextView mTvTotalIncome, mTvTotalExpense;
+    private TextView mTvMonth, mTvYear;
+    private MonthlyHistory mCurrentHistory = new MonthlyHistory();
+    String[] monthName = { "January", "February", "March", "April", "May", "June", "July",
+            "August", "September", "October", "November", "December" };
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,12 +41,21 @@ public class StatisticsFragment extends Fragment {
     private void init(View view) {
         long monthlyIncome = mCurrentHistory.monthlyIncome;
 
+        mTvMonth = view.findViewById(R.id.tv_month);
+        mTvMonth.setText(monthName[mCurrentHistory.currentMonth.get(Calendar.MONTH)]);
+        mTvYear = view.findViewById(R.id.tv_year);
+        mTvYear.setText(String.valueOf(mCurrentHistory.currentMonth.get(Calendar.YEAR)));
+
         rvListJar = view.findViewById(R.id.rv_list_jar);
         rvListJar.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mJarAdapter = new JarAdapter(getContext());
         rvListJar.setAdapter(mJarAdapter);
-        mTvTotal = view.findViewById(R.id.tv_total);
-        mTvTotal.setText(String.valueOf(monthlyIncome));
+
+        mTvTotalIncome = view.findViewById(R.id.tv_total_income);
+        mTvTotalIncome.setText(String.valueOf(monthlyIncome));
+        mTvTotalExpense = view.findViewById(R.id.tv_total_expenses);
+        mTvTotalExpense.setText(String.valueOf(mCurrentHistory.getTotalExpense()));
+
         updateDataJars();
     }
 

@@ -7,12 +7,12 @@ import com.example.vuquang.jars.R;
  */
 
 public enum JarType {
-    FFA,
-    LTSS,
-    EDU,
-    NEC,
-    PLAY,
-    GIVE;
+    FFA(0),
+    LTSS(1),
+    EDU(2),
+    NEC(3),
+    PLAY(4),
+    GIVE(5);
     public final static String nameList[] = {"FFA","LTSS","EDU","NEC","Play","Give"};
     public final static float ratioList[] = {0.1f,0.1f,0.05f,0.55f,0.1f,0.1f};
     public final static int resIconList[] = {R.drawable.ic_ffa_jar,
@@ -24,36 +24,8 @@ public enum JarType {
 
     private int id;
 
-    JarType() {
-        switch(this) {
-            case FFA: {
-                this.id = 0;
-                break;
-            }
-            case LTSS: {
-                this.id = 1;
-                break;
-            }
-            case EDU: {
-                this.id = 2;
-                break;
-            }
-            case NEC: {
-                this.id = 3;
-                break;
-            }
-            case PLAY: {
-                this.id = 4;
-                break;
-            }
-            case GIVE: {
-                this.id = 5;
-                break;
-            }
-            default: {
-                this.id = -1;
-            }
-        }
+    JarType(int id) {
+        this.id = id;
     }
 
     public int getId() {

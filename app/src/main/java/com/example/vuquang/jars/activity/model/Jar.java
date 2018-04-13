@@ -2,6 +2,7 @@ package com.example.vuquang.jars.activity.model;
 
 import com.example.vuquang.jars.activity.main.MainActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public class Jar {
         }
         this.type = type;
         this.totalAmount = Math.round(total*type.getRatio());
+        expenseList = new ArrayList<>();
     }
 
     public long getCurrentAmount() {
@@ -30,7 +32,7 @@ public class Jar {
     }
 
     public String getName() {
-        return String.format("%s (%d%)",type.getName(),Math.round(type.getRatio()*100));
+        return type.getName()+" ("+Math.round(type.getRatio()*100)+"%)";
     }
 
     public int getResIcon() {
