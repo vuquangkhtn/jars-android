@@ -7,4 +7,5 @@ package com.example.vuquang.jars.activity.model;
 public class Expense {
     public long amount;
     public String title;
+    public JarType jarType;
 }
