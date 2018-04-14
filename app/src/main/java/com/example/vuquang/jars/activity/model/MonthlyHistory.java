@@ -21,7 +21,9 @@ public class MonthlyHistory {
         monthlyIncome = JarsApp.getApp().getTotalIncome();
         jarList = new ArrayList<>();
         for (JarType type: JarType.values()) {
-            jarList.add(new Jar(type,monthlyIncome));
+            if(type != JarType.ALL) {
+                jarList.add(new Jar(type, monthlyIncome));
+            }
         }
     }
 

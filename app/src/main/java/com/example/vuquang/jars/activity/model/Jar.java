@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Jar {
     public long totalAmount;
-    public JarType type;
+    private JarType type;
     public List<Expense> expenseList;
 
     public Jar(JarType type, long total) {
@@ -31,8 +31,12 @@ public class Jar {
         return currentAmount;
     }
 
-    public String getName() {
+    public String getLongName() {
         return type.getName()+" ("+Math.round(type.getRatio()*100)+"%)";
+    }
+
+    public String getName() {
+        return type.getName();
     }
 
     public int getResIcon() {

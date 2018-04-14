@@ -10,6 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vuquang.jars.R;
+import com.example.vuquang.jars.activity.app.JarsApp;
+import com.example.vuquang.jars.activity.model.Jar;
+import com.example.vuquang.jars.activity.model.JarType;
+import com.example.vuquang.jars.activity.model.MonthlyHistory;
 
 /**
  * Created by CPU10584-local on 09-Apr-18.
@@ -21,11 +25,14 @@ public class ExpensesFragment extends Fragment {
     ViewPager mViewPager;
     MainTabAdapter mTabAdapter;
     TabLayout mTabLayout;
+    MonthlyHistory history = new MonthlyHistory();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = View.inflate(getActivity(), R.layout.fragment_expenses, null);
+
         mFabAdd = view.findViewById(R.id.fab_add);
         mFabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,12 +41,12 @@ public class ExpensesFragment extends Fragment {
             }
         });
 
-
-
         mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
         mTabAdapter = new MainTabAdapter(getActivity().getSupportFragmentManager(), getContext());
+        history.jarList.add(new Jar(JarType.ALL, history.monthlyIncome));
+        mTabAdapter.setData(history.jarList);
         mViewPager.setAdapter(mTabAdapter);
-        mViewPager.setOffscreenPageLimit(2);
+        mViewPager.setOffscreenPageLimit(3);
 
         mTabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         mTabLayout.setupWithViewPager(mViewPager);

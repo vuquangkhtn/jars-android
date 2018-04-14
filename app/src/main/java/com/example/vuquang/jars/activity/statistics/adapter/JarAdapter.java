@@ -40,7 +40,7 @@ public class JarAdapter extends RecyclerView.Adapter<JarAdapter.JarHolder> {
     public void onBindViewHolder(JarHolder holder, int position) {
         Jar jar = listJar.get(position);
         holder.imvIcon.setImageResource(jar.getResIcon());
-        String name = jar.getName();
+        String name = jar.getLongName();
         holder.tvName.setText(name);
         holder.tvAmount.setText(String.valueOf(jar.getCurrentAmount())+" / "+String.valueOf(jar.totalAmount));
     }

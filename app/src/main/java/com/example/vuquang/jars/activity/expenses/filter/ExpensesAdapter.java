@@ -1,4 +1,4 @@
-package com.example.vuquang.jars.activity.expenses.adapter;
+package com.example.vuquang.jars.activity.expenses.filter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.model.Expense;
-import com.example.vuquang.jars.activity.model.JarType;
 
 import java.util.List;
 
