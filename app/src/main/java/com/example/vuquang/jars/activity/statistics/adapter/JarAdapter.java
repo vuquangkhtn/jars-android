@@ -9,9 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
-import com.example.vuquang.jars.activity.model.Jar;
-
-import java.util.List;
+import com.example.vuquang.jars.activity.model.JarType;
+import com.example.vuquang.jars.activity.model.MonthlyHistory;
 
 /**
  * Created by CPU10584-local on 11-Apr-18.
@@ -19,15 +18,15 @@ import java.util.List;
 
 public class JarAdapter extends RecyclerView.Adapter<JarAdapter.JarHolder> {
 
-    private List<Jar> listJar;
+    private MonthlyHistory mHistory;
     private Context mContext;
 
     public JarAdapter(Context context) {
         this.mContext = context;
     }
 
-    public void setData(List<Jar> listData) {
-        this.listJar = listData;
+    public void setData(MonthlyHistory history) {
+        this.mHistory = history;
         notifyDataSetChanged();
     }
 
@@ -38,17 +37,18 @@ public class JarAdapter extends RecyclerView.Adapter<JarAdapter.JarHolder> {
 
     @Override
     public void onBindViewHolder(JarHolder holder, int position) {
-        Jar jar = listJar.get(position);
-        holder.imvIcon.setImageResource(jar.getResIcon());
-        String name = jar.getLongName();
+        JarType type = JarType.values()[position];
+        holder.imvIcon.setImageResource(type.getResIdIcon());
+        String name = type.getName();
         holder.tvName.setText(name);
-        holder.tvAmount.setText(String.valueOf(jar.getCurrentAmount())+" / "+String.valueOf(jar.totalAmount));
+        holder.tvAmount.setText(String.valueOf(mHistory.getCurrentAmountBy(type) + " / "
+                + String.valueOf(mHistory.getTotalIncomeBy(type))));
     }
 
     @Override
     public int getItemCount() {
-        if (listJar != null) {
-            return listJar.size();
+        if (mHistory.expenseList != null) {
+            return JarType.values().length - 1;
         }
         return 0;
     }
@@ -58,6 +58,7 @@ public class JarAdapter extends RecyclerView.Adapter<JarAdapter.JarHolder> {
         private ImageView imvIcon;
         private TextView tvName;
         private TextView tvAmount;
+
         public JarHolder(View itemView) {
             super(itemView);
             imvIcon = itemView.findViewById(R.id.imv_icon);

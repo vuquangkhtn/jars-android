@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.expenses.filter.FilterExpenseFragment;
-import com.example.vuquang.jars.activity.model.Jar;
+import com.example.vuquang.jars.activity.model.Expense;
+import com.example.vuquang.jars.activity.model.JarType;
+import com.example.vuquang.jars.activity.model.MonthlyHistory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,40 +26,40 @@ import java.util.List;
 
 public class MainTabAdapter extends FragmentPagerAdapter {
     private Context mContext;
-    private List<Jar> jarList;
+    private MonthlyHistory mHistory;
 
     public MainTabAdapter(FragmentManager fm, Context context) {
         super(fm);
         mContext = context;
-        jarList = new ArrayList<>();
     }
 
-    public void setData(List<Jar> jarList) {
-        this.jarList = jarList;
+    public void setData(MonthlyHistory history) {
+        this.mHistory = history;
         notifyDataSetChanged();
     }
 
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = new FilterExpenseFragment();
-
+        List<Expense> list = mHistory.getExpensesListBy(JarType.values()[position]);
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(FilterExpenseFragment.ARG_OBJECT, (ArrayList<? extends Parcelable>) jarList.get(position).expenseList);
+        bundle.putParcelableArrayList(FilterExpenseFragment.ARG_OBJECT, (ArrayList<? extends Parcelable>) list);
         fragment.setArguments(bundle);
         return fragment;
     }
 
     @Override
     public int getCount() {
-        return jarList.size();
+        return JarType.values().length;
     }
 
     public View getCustomTabView(int position) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.layout_tab_item, null);
+        JarType type = JarType.values()[position];
         ImageView imvIcon = (ImageView) v.findViewById(R.id.imv_tab_icon);
-        imvIcon.setImageResource(jarList.get(position).getResIcon());
+        imvIcon.setImageResource(type.getResIdIcon());
         TextView tvTabName = (TextView) v.findViewById(R.id.tv_tab_name);
-        tvTabName.setText(jarList.get(position).getName());
+        tvTabName.setText(type.getName());
         return v;
     }
 }

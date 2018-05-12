@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
-import com.example.vuquang.jars.activity.app.JarsApp;
-import com.example.vuquang.jars.activity.model.Jar;
 import com.example.vuquang.jars.activity.model.MonthlyHistory;
 import com.example.vuquang.jars.activity.statistics.adapter.JarAdapter;
 
@@ -60,6 +58,6 @@ public class StatisticsFragment extends Fragment {
     }
 
     private void updateDataJars() {
-        mJarAdapter.setData(mCurrentHistory.jarList);
+        mJarAdapter.setData(mCurrentHistory);
     }
 }

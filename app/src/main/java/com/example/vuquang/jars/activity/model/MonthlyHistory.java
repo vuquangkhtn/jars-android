@@ -14,32 +14,59 @@ import java.util.List;
 public class MonthlyHistory {
     public Calendar currentMonth;
     public long monthlyIncome;
-    public List<Jar> jarList;
+    public List<Expense> expenseList;
 
     public MonthlyHistory() {
         currentMonth = Calendar.getInstance();
         monthlyIncome = JarsApp.getApp().getTotalIncome();
-        jarList = new ArrayList<>();
-        for (JarType type: JarType.values()) {
-            if(type != JarType.ALL) {
-                jarList.add(new Jar(type, monthlyIncome));
-            }
-        }
+        expenseList = new ArrayList<>();
     }
 
-    public void addExpense(JarType type, Expense expense) {
-        for (Jar jar: jarList) {
-            if(jar.type == type) {
-                jar.expenseList.add(expense);
-            }
-        }
+    public void addExpense(Expense expense) {
+        expenseList.add(expense);
     }
 
     public long getTotalExpense() {
         long currentAmount = 0;
-        for (Jar jar:jarList) {
-            currentAmount += jar.getCurrentAmount();
+        for (Expense expense:expenseList) {
+            currentAmount += expense.amount;
         }
         return currentAmount;
+    }
+
+    public List<Expense> getExpensesListBy(JarType type) {
+        if(type == JarType.ALL) {
+            return expenseList;
+        } else {
+            List<Expense> list = new ArrayList<>();
+            for (Expense expense :
+                    expenseList) {
+                if(expense.jarType == type) {
+                    list.add(expense);
+                }
+            }
+            return list;
+        }
+    }
+
+    public long getCurrentAmountBy(JarType type) {
+        if(type == JarType.ALL) {
+            return getTotalExpense();
+        } else {
+            long total = 0;
+            for (Expense expense :
+                    getExpensesListBy(type)) {
+                total += expense.amount;
+            }
+            return total;
+        }
+    }
+
+    public long getTotalIncomeBy(JarType type) {
+        if(type == JarType.ALL) {
+            return monthlyIncome;
+        } else {
+            return (long) (monthlyIncome*type.getRatio());
+        }
     }
 }

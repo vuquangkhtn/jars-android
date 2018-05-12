@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vuquang.jars.R;
-import com.example.vuquang.jars.activity.app.JarsApp;
-import com.example.vuquang.jars.activity.model.Jar;
 import com.example.vuquang.jars.activity.model.JarType;
 import com.example.vuquang.jars.activity.model.MonthlyHistory;
 
@@ -43,8 +41,7 @@ public class ExpensesFragment extends Fragment {
 
         mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
         mTabAdapter = new MainTabAdapter(getActivity().getSupportFragmentManager(), getContext());
-        history.jarList.add(new Jar(JarType.ALL, history.monthlyIncome));
-        mTabAdapter.setData(history.jarList);
+        mTabAdapter.setData(history);
         mViewPager.setAdapter(mTabAdapter);
         mViewPager.setOffscreenPageLimit(3);
 
