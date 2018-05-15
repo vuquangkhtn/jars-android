@@ -6,6 +6,7 @@ import com.example.vuquang.jars.activity.data.db.model.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
@@ -26,17 +27,7 @@ public class AppDbHelper implements DbHelper {
 
     @Override
     public String insertUser(String id, String username, String email) {
-        return appDao.insertUser(id, username, email);
-    }
-
-    @Override
-    public List<MonthlyHistory> getHistoriesBy(int userId) {
-        return null;
-    }
-
-    @Override
-    public MonthlyHistory getCurrentHistory(int userId) {
-        return null;
+        return appDao.getUserDao().insertUser(id, username, email);
     }
 
     @Override
@@ -46,11 +37,26 @@ public class AppDbHelper implements DbHelper {
 
     @Override
     public boolean isLogined() {
-        return appDao.isLogined();
+        return appDao.getUserDao().isLogined();
     }
 
     @Override
     public Task<AuthResult> signIn(String email, String password) {
-        return appDao.signIn(email, password);
+        return appDao.getUserDao().signIn(email, password);
+    }
+
+    @Override
+    public String getUsername() {
+        return appDao.getUserDao().getUsername();
+    }
+
+    @Override
+    public DatabaseReference getHistoryEndPoint() {
+        return appDao.getHistoryDao().getHistoryEndPoint();
+    }
+
+    @Override
+    public MonthlyHistory getMonthlyHistoryFrom(DataSnapshot dataSnapshot) {
+        return appDao.getHistoryDao().getMonthlyHistoryFrom(dataSnapshot);
     }
 }

@@ -35,7 +35,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
-                android:text="0"
                 android:singleLine="true"
                 android:textSize="35sp"/>
         </LinearLayout>
@@ -61,7 +60,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
-                android:text="0"
                 android:singleLine="true"
                 android:textSize="35sp"/>
         </LinearLayout>
@@ -78,14 +76,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
-                android:text="August"
                 android:textSize="@dimen/d40"/>
             <TextView
                 android:id="@+id/tv_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
-                android:text="2018"
                 android:textSize="@dimen/d30"/>
         </LinearLayout>
     </FrameLayout>

@@ -41,13 +41,13 @@ public class JarAdapter extends RecyclerView.Adapter<JarAdapter.JarHolder> {
         holder.imvIcon.setImageResource(type.getResIdIcon());
         String name = type.getName();
         holder.tvName.setText(name);
-        holder.tvAmount.setText(String.valueOf(mHistory.getCurrentAmountBy(type) + " / "
-                + String.valueOf(mHistory.getTotalIncomeBy(type))));
+        holder.tvAmount.setText(String.valueOf(mHistory.calculateCurrentAmountBy(type) + " / "
+                + String.valueOf(mHistory.calculateTotalIncomeBy(type))));
     }
 
     @Override
     public int getItemCount() {
-        if (mHistory.expenseList != null) {
+        if (mHistory != null && mHistory.expenseList != null) {
             return JarType.values().length - 1;
         }
         return 0;

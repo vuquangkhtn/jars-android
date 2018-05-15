@@ -9,4 +9,5 @@ import com.example.vuquang.jars.activity.base.MvpView;
 public interface LoginMvpView extends MvpView {
     void goToMain();
     void goToSignUpAct();
+    void showSnackBar(String message);
 }

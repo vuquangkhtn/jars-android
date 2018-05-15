@@ -32,8 +32,6 @@ public interface MvpView {
 
     void hideLoading();
 
-    void showSnackBar(String message);
-
     void openActivityOnTokenExpire();
 
     void onError(@StringRes int resId);

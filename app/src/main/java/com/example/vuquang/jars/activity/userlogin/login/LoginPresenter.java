@@ -3,7 +3,6 @@ package com.example.vuquang.jars.activity.userlogin.login;
 import android.support.annotation.NonNull;
 
 import com.example.vuquang.jars.activity.base.BasePresenter;
-import com.example.vuquang.jars.activity.base.MvpView;
 import com.example.vuquang.jars.activity.data.DataManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

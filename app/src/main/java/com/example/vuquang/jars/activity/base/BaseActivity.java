@@ -40,10 +40,10 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
     public void showSnackBar(String message) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
                 message, Snackbar.LENGTH_SHORT);
-        View sbView = snackbar.getView();
-        TextView textView = (TextView) sbView
-                .findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+//        View sbView = snackbar.getView();
+//        TextView textView = (TextView) sbView
+//                .findViewById(android.support.design.R.id.snackbar_text);
+//        textView.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         snackbar.show();
     }
 

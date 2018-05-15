@@ -14,28 +14,27 @@ import java.util.List;
 public class MonthlyHistory {
     public String historyId;
     public String userId;
-    private long currentMonth;
+    public long currentMonth;
     public long monthlyIncome;
     public List<Expense> expenseList;
 
-    public MonthlyHistory(String userId) {
-        this.userId = userId;
-        currentMonth = new GregorianCalendar().getTimeInMillis();
+    public MonthlyHistory() {
+        GregorianCalendar calendar = new GregorianCalendar();
+        this.userId = null;
+        currentMonth = calendar.getTimeInMillis();
         monthlyIncome = JarsApp.getApp().getTotalIncome();
         expenseList = new ArrayList<>();
     }
 
-    public void setCurrentMonth(GregorianCalendar calendar) {
-        currentMonth = calendar.getTimeInMillis();
-    }
-
-    public GregorianCalendar getCurrentMonth() {
+    public MonthlyHistory(String userId) {
         GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTimeInMillis(currentMonth);
-        return calendar;
+        this.userId = userId;
+        currentMonth = calendar.getTimeInMillis();
+        monthlyIncome = JarsApp.getApp().getTotalIncome();
+        expenseList = new ArrayList<>();
     }
 
-    public long getTotalExpense() {
+    public long calculateTotalExpense() {
         long currentAmount = 0;
         for (Expense expense:expenseList) {
             currentAmount += expense.amount;
@@ -43,7 +42,13 @@ public class MonthlyHistory {
         return currentAmount;
     }
 
-    public List<Expense> getExpensesListBy(JarType type) {
+    public GregorianCalendar monthToCalendar() {
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTimeInMillis(currentMonth);
+        return calendar;
+    }
+
+    public List<Expense> findExpensesListBy(JarType type) {
         if(type == JarType.ALL) {
             return expenseList;
         } else {
@@ -58,20 +63,20 @@ public class MonthlyHistory {
         }
     }
 
-    public long getCurrentAmountBy(JarType type) {
+    public long calculateCurrentAmountBy(JarType type) {
         if(type == JarType.ALL) {
-            return getTotalExpense();
+            return calculateTotalExpense();
         } else {
             long total = 0;
             for (Expense expense :
-                    getExpensesListBy(type)) {
+                    findExpensesListBy(type)) {
                 total += expense.amount;
             }
             return total;
         }
     }
 
-    public long getTotalIncomeBy(JarType type) {
+    public long calculateTotalIncomeBy(JarType type) {
         if(type == JarType.ALL) {
             return monthlyIncome;
         } else {
