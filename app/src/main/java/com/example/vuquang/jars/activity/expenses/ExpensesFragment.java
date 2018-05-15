@@ -10,20 +10,24 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vuquang.jars.R;
-import com.example.vuquang.jars.activity.model.JarType;
-import com.example.vuquang.jars.activity.model.MonthlyHistory;
+import com.example.vuquang.jars.activity.data.db.model.MonthlyHistory;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by CPU10584-local on 09-Apr-18.
  */
 
 public class ExpensesFragment extends Fragment {
+    private final static int LIMIT = 100;
+
     private FloatingActionButton mFabAdd;
 
     ViewPager mViewPager;
     MainTabAdapter mTabAdapter;
     TabLayout mTabLayout;
-    MonthlyHistory history = new MonthlyHistory();
+    MonthlyHistory history;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,12 +43,6 @@ public class ExpensesFragment extends Fragment {
             }
         });
 
-        mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
-        mTabAdapter = new MainTabAdapter(getActivity().getSupportFragmentManager(), getContext());
-        mTabAdapter.setData(history);
-        mViewPager.setAdapter(mTabAdapter);
-        mViewPager.setOffscreenPageLimit(3);
-
         mTabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         mTabLayout.setupWithViewPager(mViewPager);
 
@@ -53,8 +51,17 @@ public class ExpensesFragment extends Fragment {
             TabLayout.Tab tab = mTabLayout.getTabAt(i);
             tab.setCustomView(mTabAdapter.getCustomTabView(i));
         }
+
+        mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
+        mTabAdapter = new MainTabAdapter(getActivity().getSupportFragmentManager(), getContext());
+        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setAdapter(mTabAdapter);
+
+        //Todo: load expense list
+
         return view;
     }
+
 
     private void startAddFragment() {
         AddExpenseFragment.show(getActivity().getSupportFragmentManager());

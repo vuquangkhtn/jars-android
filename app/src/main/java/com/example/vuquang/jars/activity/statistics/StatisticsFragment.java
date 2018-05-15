@@ -11,21 +11,35 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
-import com.example.vuquang.jars.activity.model.MonthlyHistory;
+import com.example.vuquang.jars.activity.data.db.dao.HistoryDao;
+import com.example.vuquang.jars.activity.data.db.model.MonthlyHistory;
 import com.example.vuquang.jars.activity.statistics.adapter.JarAdapter;
+import com.example.vuquang.jars.activity.utils.KeyPref;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by CPU10584-local on 09-Apr-18.
  */
 
 public class StatisticsFragment extends Fragment {
+
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+
     private RecyclerView rvListJar;
     private JarAdapter mJarAdapter;
     private TextView mTvTotalIncome, mTvTotalExpense;
     private TextView mTvMonth, mTvYear;
-    private MonthlyHistory mCurrentHistory = new MonthlyHistory();
+    private MonthlyHistory mCurrentHistory;
     String[] monthName = { "January", "February", "March", "April", "May", "June", "July",
             "August", "September", "October", "November", "December" };
     @Nullable
@@ -37,27 +51,48 @@ public class StatisticsFragment extends Fragment {
     }
 
     private void init(View view) {
-        long monthlyIncome = mCurrentHistory.monthlyIncome;
+
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mTvMonth = view.findViewById(R.id.tv_month);
-        mTvMonth.setText(monthName[mCurrentHistory.currentMonth.get(Calendar.MONTH)]);
         mTvYear = view.findViewById(R.id.tv_year);
-        mTvYear.setText(String.valueOf(mCurrentHistory.currentMonth.get(Calendar.YEAR)));
+        mTvTotalIncome = view.findViewById(R.id.tv_total_income);
+        mTvTotalExpense = view.findViewById(R.id.tv_total_expenses);
 
         rvListJar = view.findViewById(R.id.rv_list_jar);
         rvListJar.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mJarAdapter = new JarAdapter(getContext());
         rvListJar.setAdapter(mJarAdapter);
 
-        mTvTotalIncome = view.findViewById(R.id.tv_total_income);
-        mTvTotalIncome.setText(String.valueOf(monthlyIncome));
-        mTvTotalExpense = view.findViewById(R.id.tv_total_expenses);
-        mTvTotalExpense.setText(String.valueOf(mCurrentHistory.getTotalExpense()));
+        mDatabase.child(KeyPref.HISTORY_KEY).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String uid = mAuth.getUid();
+                for (DataSnapshot note: dataSnapshot.getChildren()){
+                    MonthlyHistory history = note.getValue(MonthlyHistory.class);
+                    if(history != null && history.userId.equals(uid)) {
+                        updateUI(history);
+                        return;
+                    }
+                }
+                updateUI(new MonthlyHistory(uid));
+            }
 
-        updateDataJars();
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
-    private void updateDataJars() {
+    void updateUI(MonthlyHistory history){
+        mCurrentHistory = history;
+        mTvMonth.setText(monthName[mCurrentHistory.getCurrentMonth().get(Calendar.MONTH)]);
+        mTvYear.setText(String.valueOf(mCurrentHistory.getCurrentMonth().get(Calendar.YEAR)));
+        mTvTotalIncome.setText(String.valueOf(mCurrentHistory.monthlyIncome));
+        mTvTotalExpense.setText(String.valueOf(mCurrentHistory.getTotalExpense()));
         mJarAdapter.setData(mCurrentHistory);
     }
 }

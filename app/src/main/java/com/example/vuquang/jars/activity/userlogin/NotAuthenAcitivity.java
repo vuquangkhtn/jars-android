@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.vuquang.jars.activity.base.BaseActivity;
+
 /**
  * Created by VuQuang on 4/8/2018.
  */
 
-public class NotAuthenAcitivity extends AppCompatActivity {
+public class NotAuthenAcitivity extends BaseActivity {
     public static final String ACTION_LOGIN = "action_login";
 
     BroadcastReceiver receiver = new BroadcastReceiver() {

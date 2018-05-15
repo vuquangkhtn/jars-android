@@ -1,29 +1,38 @@
-package com.example.vuquang.jars.activity.model;
+package com.example.vuquang.jars.activity.data.db.model;
 
 import com.example.vuquang.jars.activity.app.JarsApp;
+import com.google.firebase.database.IgnoreExtraProperties;
 
-import java.time.Month;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
  * Created by CPU10584-local on 09-Apr-18.
  */
-
+@IgnoreExtraProperties
 public class MonthlyHistory {
-    public Calendar currentMonth;
+    public String historyId;
+    public String userId;
+    private long currentMonth;
     public long monthlyIncome;
     public List<Expense> expenseList;
 
-    public MonthlyHistory() {
-        currentMonth = Calendar.getInstance();
+    public MonthlyHistory(String userId) {
+        this.userId = userId;
+        currentMonth = new GregorianCalendar().getTimeInMillis();
         monthlyIncome = JarsApp.getApp().getTotalIncome();
         expenseList = new ArrayList<>();
     }
 
-    public void addExpense(Expense expense) {
-        expenseList.add(expense);
+    public void setCurrentMonth(GregorianCalendar calendar) {
+        currentMonth = calendar.getTimeInMillis();
+    }
+
+    public GregorianCalendar getCurrentMonth() {
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTimeInMillis(currentMonth);
+        return calendar;
     }
 
     public long getTotalExpense() {
@@ -41,7 +50,7 @@ public class MonthlyHistory {
             List<Expense> list = new ArrayList<>();
             for (Expense expense :
                     expenseList) {
-                if(expense.jarType == type) {
+                if(expense.getType() == type) {
                     list.add(expense);
                 }
             }

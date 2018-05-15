@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
-import com.example.vuquang.jars.activity.model.JarType;
-import com.example.vuquang.jars.activity.model.MonthlyHistory;
+import com.example.vuquang.jars.activity.data.db.model.JarType;
+import com.example.vuquang.jars.activity.data.db.model.MonthlyHistory;
 
 /**
  * Created by CPU10584-local on 11-Apr-18.

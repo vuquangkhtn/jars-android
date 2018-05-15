@@ -6,7 +6,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -15,18 +14,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
+import com.example.vuquang.jars.activity.base.BaseActivity;
 import com.example.vuquang.jars.activity.app.JarsApp;
 import com.example.vuquang.jars.activity.expenses.ExpensesFragment;
 import com.example.vuquang.jars.activity.statistics.StatisticsFragment;
-import com.example.vuquang.jars.activity.userlogin.model.AccessMode;
-import com.example.vuquang.jars.activity.utils.Pref;
-import com.example.vuquang.jars.activity.utils.SharePrefHelper;
 
 /**
  * Created by CPU10584-local on 09-Apr-18.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private View navHeader;
     private LinearLayout layoutOffline, layoutUser;
     private DrawerLayout mDrawer;
@@ -111,38 +108,14 @@ public class MainActivity extends AppCompatActivity {
     private void loadNavHeader() {
         // name, website
         txtTitle.setText("JARS");
-        String mode = SharePrefHelper.get().getString(Pref.access_pref);
-        if(mode.equals(AccessMode.ONLINE.getMode())) {
-            setHeaderBy(AccessMode.ONLINE);
-            txtName.setText(SharePrefHelper.get().getString(Pref.username_pref));
-        } else {
-            setHeaderBy(AccessMode.OFFLINE);
-        }
+        setHeaderBy();
+//        txtName.setText(SharePrefHelper.get().getString(SharePref.username_pref));
     }
 
-    private void setHeaderBy(AccessMode mode) {
-        switch (mode) {
-            case ONLINE: {
-                layoutUser.setVisibility(View.VISIBLE);
-                layoutOffline.setVisibility(View.GONE);
-                mImvProfile.setImageResource(R.drawable.ic_user_test);
-                break;
-            }
-            case OFFLINE:
-            default: {
-                mImvProfile.setImageResource(R.drawable.ic_profile);
-                layoutUser.setVisibility(View.GONE);
-                layoutOffline.setVisibility(View.VISIBLE);
-                layoutOffline.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        JarsApp.getApp().logout(MainActivity.this);
-                        finish();
-                    }
-                });
-                break;
-            }
-        }
+    private void setHeaderBy() {
+        layoutUser.setVisibility(View.VISIBLE);
+        layoutOffline.setVisibility(View.GONE);
+        mImvProfile.setImageResource(R.drawable.ic_user_test);
     }
 
     public void setupDrawerContent(NavigationView navigationView) {

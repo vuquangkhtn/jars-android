@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
-import com.example.vuquang.jars.activity.model.Expense;
+import com.example.vuquang.jars.activity.data.db.model.Expense;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
     @Override
     public void onBindViewHolder(ExpensesHolder holder, int position) {
         Expense expense = expenseList.get(position);
-        holder.imvIcon.setImageResource(expense.jarType.getResIdIcon());
+        holder.imvIcon.setImageResource(expense.getType().getResIdIcon());
         holder.tvName.setText(expense.title);
         holder.tvAmount.setText(String.valueOf(expense.amount));
     }

@@ -37,12 +37,12 @@
         android:layout_marginRight="@dimen/d15"
         android:orientation="vertical">
         <EditText
-            android:id="@+id/edt_username"
+            android:id="@+id/edt_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/user_name"
+            android:hint="@string/email"
             android:textAlignment="center"
-            android:inputType="text"
+            android:inputType="textWebEmailAddress"
             android:textCursorDrawable="@null"
             android:textColor="@android:color/white"
             android:textColorHint="@color/hint_color"
@@ -75,19 +75,6 @@
             android:textColorHint="@color/hint_color"
             android:backgroundTint="@color/hint_color"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:layout_marginBottom="@dimen/d12" />
-        <EditText
-            android:id="@+id/edt_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/email"
-            android:textAlignment="center"
-            android:inputType="textWebEmailAddress"
-            android:textCursorDrawable="@null"
-            android:textColor="@android:color/white"
-            android:textColorHint="@color/hint_color"
-            android:backgroundTint="@color/hint_color"
             android:singleLine="true"
             android:layout_marginBottom="@dimen/d12" />
         <Button

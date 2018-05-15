@@ -2,7 +2,6 @@ package com.example.vuquang.jars.activity.expenses;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -13,12 +12,7 @@ import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.expenses.filter.FilterExpenseFragment;
-import com.example.vuquang.jars.activity.model.Expense;
-import com.example.vuquang.jars.activity.model.JarType;
-import com.example.vuquang.jars.activity.model.MonthlyHistory;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.vuquang.jars.activity.data.db.model.JarType;
 
 /**
  * Created by CPU10584-local on 09-Apr-18.
@@ -26,24 +20,17 @@ import java.util.List;
 
 public class MainTabAdapter extends FragmentPagerAdapter {
     private Context mContext;
-    private MonthlyHistory mHistory;
 
     public MainTabAdapter(FragmentManager fm, Context context) {
         super(fm);
         mContext = context;
     }
 
-    public void setData(MonthlyHistory history) {
-        this.mHistory = history;
-        notifyDataSetChanged();
-    }
-
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = new FilterExpenseFragment();
-        List<Expense> list = mHistory.getExpensesListBy(JarType.values()[position]);
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(FilterExpenseFragment.ARG_OBJECT, (ArrayList<? extends Parcelable>) list);
+        bundle.putInt(FilterExpenseFragment.ARG_OBJECT, position);
         fragment.setArguments(bundle);
         return fragment;
     }

@@ -1,14 +1,12 @@
-package com.example.vuquang.jars.activity.model;
+package com.example.vuquang.jars.activity.data.db.model;
 
 import com.example.vuquang.jars.R;
-
-import java.io.Serializable;
 
 /**
  * Created by CPU10584-local on 09-Apr-18.
  */
 
-public enum JarType implements Serializable{
+public enum JarType {
     FFA(0),
     LTSS(1),
     EDU(2),
