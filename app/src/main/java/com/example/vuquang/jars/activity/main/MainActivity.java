@@ -1,5 +1,6 @@
 package com.example.vuquang.jars.activity.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -15,38 +16,66 @@ import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.base.BaseActivity;
-import com.example.vuquang.jars.activity.app.JarsApp;
+import com.example.vuquang.jars.activity.data.AppDataManager;
 import com.example.vuquang.jars.activity.expenses.ExpensesFragment;
 import com.example.vuquang.jars.activity.statistics.StatisticsFragment;
+import com.example.vuquang.jars.activity.userlogin.login.LoginActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by CPU10584-local on 09-Apr-18.
  */
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements MainMvpView {
     private View navHeader;
-    private LinearLayout layoutOffline, layoutUser;
+    private LinearLayout  layoutUser;
     private DrawerLayout mDrawer;
     private NavigationView navigationView;
     private ImageButton imbMenu, imbBack, imbHelp;
     private TextView txtTitle, txtName;
     private ImageView mImvProfile;
 
+    private MainMvpPresenter<MainMvpView> mPresenter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mPresenter = new MainPresenter<>(new AppDataManager(
+                FirebaseDatabase.getInstance().getReference(),
+                FirebaseAuth.getInstance()
+        ));
+
+        mPresenter.onAttach(MainActivity.this);
+
         txtTitle = findViewById(R.id.tv_title);
         mDrawer = findViewById(R.id.drawer_layout);
 
         navigationView = findViewById(R.id.nav_view);
-        setupDrawerContent(navigationView);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        switch(menuItem.getItemId()) {
+                            case R.id.nav_expenses:
+                                changeFragment(new ExpensesFragment(), menuItem);
+                                break;
+                            case R.id.nav_statistics:
+                                changeFragment(new StatisticsFragment(), menuItem);
+                                break;
+                            case R.id.nav_sign_out:
+                                mPresenter.onLogoutClicked();
+                                finish();
+                        }
+                        return true;
+                    }
+                });
 
         navHeader = navigationView.getHeaderView(0);
-        layoutOffline = navHeader.findViewById(R.id.layout_offline);
         layoutUser = navHeader.findViewById(R.id.layout_user);
-        txtName = navHeader.findViewById(R.id.name);
+        txtName = navHeader.findViewById(R.id.tv_username);
         mImvProfile = navHeader.findViewById(R.id.img_profile);
 
         imbBack = findViewById(R.id.imv_navi_back);
@@ -56,7 +85,7 @@ public class MainActivity extends BaseActivity {
         imbMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openDrawer();
+                mPresenter.onMenuClicked();
             }
         });
 
@@ -64,108 +93,55 @@ public class MainActivity extends BaseActivity {
         imbHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openHelpFragmennt();
+                mPresenter.onHelpClicked();
             }
         });
 
-        loadNavHeader();
-        setDefaultFragment(ExpensesFragment.class);
+        setDefaultFragment();
+
+        mPresenter.onNavHeaderPrepared();
 
     }
 
-    private void setDefaultFragment(Class fragmentClass) {
-        Fragment defaultFragment = null;
-        if(fragmentClass == ExpensesFragment.class) {
-            txtTitle.setText(getResources().getString(R.string.expenses_name));
-        } else {
-            txtTitle.setText(getResources().getString(R.string.statistics_name));
-        }
-        try {
-            defaultFragment = (Fragment) fragmentClass.newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+    private void setDefaultFragment() {
+        txtTitle.setText(getResources().getString(R.string.expenses_name));
         // set default fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, defaultFragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, new ExpensesFragment()).commit();
     }
 
-    private void openHelpFragmennt() {
+    @Override
+    public void goToLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    @Override
+    public void openHelpFragment() {
         HelpDialogFragment.show(this.getSupportFragmentManager());
     }
 
-
+    @Override
     public void openDrawer() {
         mDrawer.openDrawer(navigationView);
     }
 
-    public void closeDrawer(){
-        mDrawer.closeDrawer(navigationView);
-    }
-
-    private void loadNavHeader() {
-        // name, website
-        txtTitle.setText("JARS");
-        setHeaderBy();
-//        txtName.setText(SharePrefHelper.get().getString(SharePref.username_pref));
-    }
-
-    private void setHeaderBy() {
+    @Override
+    public void loadNavHeader(String username) {
         layoutUser.setVisibility(View.VISIBLE);
-        layoutOffline.setVisibility(View.GONE);
         mImvProfile.setImageResource(R.drawable.ic_user_test);
+        txtName.setText(username);
     }
 
-    public void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        selectDrawerItem(menuItem);
-                        return true;
-                    }
-                });
-    }
-
-    public void selectDrawerItem(MenuItem menuItem) {
-        // Create a new fragment and specify the fragment to show based on nav item clicked
-        Fragment fragment = null;
-        Class fragmentClass;
-        switch(menuItem.getItemId()) {
-            case R.id.nav_expenses:
-                fragmentClass = ExpensesFragment.class;
-                break;
-            case R.id.nav_statistics:
-                fragmentClass = StatisticsFragment.class;
-                break;
-            case R.id.nav_sign_out:
-                JarsApp.getApp().logout(MainActivity.this);
-                finish();
-                return;
-            default:
-                fragmentClass = ExpensesFragment.class;
-        }
-
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if(fragmentClass == ExpensesFragment.class) {
-            txtTitle.setText(getResources().getString(R.string.expenses_name));
-        } else {
-            txtTitle.setText(getResources().getString(R.string.statistics_name));
-        }
-        // Insert the fragment by replacing any existing fragment
+    private void changeFragment(Fragment fragment, MenuItem menuItem) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
 
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
         // Set action bar title
-        setTitle(menuItem.getTitle());
+        txtTitle.setText(menuItem.getTitle());
         // Close the navigation mDrawer
         mDrawer.closeDrawers();
         mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, navigationView);

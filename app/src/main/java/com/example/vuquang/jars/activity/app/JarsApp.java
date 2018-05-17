@@ -32,26 +32,6 @@ public class JarsApp extends Application{
         return instance;
     }
 
-    public void logout(final Activity currentActivity) {
-        mAuth.signOut();
-        FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null) {
-                    Intent i = new Intent(currentActivity, LoginActivity.class);
-                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(i);
-                    Intent logoutIntent = new Intent(ACTION_LOGOUT);
-                    sendBroadcast(logoutIntent);
-                }
-            }
-        };
-        mAuth.addAuthStateListener(authListener);
-
-
-    }
-
     public Typeface getTypeFace(String path) {
         return Typeface.createFromAsset(getAssets(),  path);
     }

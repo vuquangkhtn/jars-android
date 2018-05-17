@@ -1,11 +1,15 @@
 package com.example.vuquang.jars.activity.data.db.dao;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
+
 import com.example.vuquang.jars.activity.data.db.model.User;
 import com.example.vuquang.jars.activity.utils.KeyPref;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -22,9 +26,13 @@ public class UserDao {
         mAuth = auth;
     }
 
+    public DatabaseReference getUserEndPoint() {
+        return mDatabase.child(KeyPref.USER_KEY);
+    }
+
     public String insertUser(String id, String username, String email){
         User user = new User(username,email);
-        mDatabase.child(KeyPref.USER_KEY).child(id).setValue(user);
+        getUserEndPoint().child(id).setValue(user);
         return id;
     }
 
@@ -38,6 +46,11 @@ public class UserDao {
 
     public Task<AuthResult> signIn(String email, String password) {
         return mAuth.signInWithEmailAndPassword(email, password);
+    }
+
+    public FirebaseAuth signOut() {
+        mAuth.signOut();
+        return mAuth;
     }
 
     public String getUsername() {

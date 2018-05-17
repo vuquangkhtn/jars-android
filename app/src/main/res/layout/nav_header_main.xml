@@ -26,38 +26,20 @@
             android:id="@+id/layout_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/tv_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/d10"
                 android:textColor="@android:color/white"
-                android:text="12345"
                 android:textSize="@dimen/d20" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/d10"
                 android:textColor="@color/hint_color"
-                android:text="Profile"
                 android:textSize="@dimen/d14" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layout_offline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:paddingTop="@dimen/d10"
-                android:textColor="@android:color/white"
-                android:text="Login"
-                android:textSize="@dimen/d25" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

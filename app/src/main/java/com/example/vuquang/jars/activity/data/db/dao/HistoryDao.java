@@ -21,16 +21,6 @@ public class HistoryDao {
         this.mAuth = auth;
     }
 
-    public String insertExpense(Expense expense, String historyId) {
-        DatabaseReference expenseEndPoint = mDatabase.child(KeyPref.HISTORY_KEY)
-                .child(historyId)
-                .child(KeyPref.EXPENSE_KEY);
-        String expenseId = expenseEndPoint.push().getKey();
-        expense.expenseId = expenseId;
-        expenseEndPoint.child(expenseId).setValue(expense);
-        return expenseId;
-    }
-
     public String insertHistory(MonthlyHistory history) {
         DatabaseReference historyEndPoint = mDatabase.child(KeyPref.HISTORY_KEY);
         String hisId = historyEndPoint.push().getKey();

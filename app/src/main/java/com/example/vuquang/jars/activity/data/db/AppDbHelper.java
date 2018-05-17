@@ -46,6 +46,11 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
+    public FirebaseAuth signOut() {
+        return appDao.getUserDao().signOut();
+    }
+
+    @Override
     public String getUsername() {
         return appDao.getUserDao().getUsername();
     }
