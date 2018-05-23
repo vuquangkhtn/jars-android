@@ -17,12 +17,12 @@
             app:tabMode="scrollable"
             app:tabIndicatorColor="@android:color/holo_blue_light" />
 
-        <com.example.vuquang.jars.activity.expenses.NoSwipeViewPager
+        <com.example.vuquang.jars.activity.expenses.tabview.NoSwipeViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tab_layout">
-        </com.example.vuquang.jars.activity.expenses.NoSwipeViewPager>
+        </com.example.vuquang.jars.activity.expenses.tabview.NoSwipeViewPager>
 
         <View
             android:layout_width="match_parent"

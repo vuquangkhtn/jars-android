@@ -18,6 +18,7 @@ import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.base.BaseActivity;
 import com.example.vuquang.jars.activity.data.AppDataManager;
 import com.example.vuquang.jars.activity.expenses.ExpensesFragment;
+import com.example.vuquang.jars.activity.setting.SettingsFragment;
 import com.example.vuquang.jars.activity.statistics.StatisticsFragment;
 import com.example.vuquang.jars.activity.userlogin.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,6 +65,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                                 break;
                             case R.id.nav_statistics:
                                 changeFragment(new StatisticsFragment(), menuItem);
+                                break;
+                            case R.id.nav_setting:
+                                changeFragment(new SettingsFragment(), menuItem);
                                 break;
                             case R.id.nav_sign_out:
                                 mPresenter.onLogoutClicked();
