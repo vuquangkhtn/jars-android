@@ -11,9 +11,8 @@ import android.view.ViewGroup;
 
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.data.db.model.MonthlyHistory;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.vuquang.jars.activity.expenses.addexpense.AddExpenseFragment;
+import com.example.vuquang.jars.activity.expenses.tabview.MainTabAdapter;
 
 /**
  * Created by CPU10584-local on 09-Apr-18.
