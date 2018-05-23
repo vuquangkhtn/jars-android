@@ -1,11 +1,19 @@
 package com.example.vuquang.jars.activity.data.db.dao;
 
+import android.support.annotation.NonNull;
+
+import com.example.vuquang.jars.activity.base.BaseFragment;
 import com.example.vuquang.jars.activity.data.db.model.Expense;
 import com.example.vuquang.jars.activity.data.db.model.MonthlyHistory;
 import com.example.vuquang.jars.activity.utils.KeyPref;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * Created by VuQuang on 5/14/2018.
@@ -21,12 +29,25 @@ public class HistoryDao {
         this.mAuth = auth;
     }
 
-    public String insertHistory(MonthlyHistory history) {
+    private MonthlyHistory init() {
+        return new MonthlyHistory(mAuth.getUid());
+    }
+
+    private String insertHistory(MonthlyHistory history) {
         DatabaseReference historyEndPoint = mDatabase.child(KeyPref.HISTORY_KEY);
         String hisId = historyEndPoint.push().getKey();
         history.historyId = hisId;
         historyEndPoint.child(hisId).setValue(history);
         return hisId;
+    }
+
+    public Task<Void> updateHistory(MonthlyHistory newHistory) {
+        DatabaseReference historyEndPoint = mDatabase.child(KeyPref.HISTORY_KEY).child(newHistory.historyId);
+        return historyEndPoint.setValue(newHistory);
+    }
+
+    public String createHistory() {
+        return insertHistory(init());
     }
 
     public DatabaseReference getHistoryEndPoint() {
@@ -48,11 +69,18 @@ public class HistoryDao {
                 }
             }
         }
-
-        if(curHistory == null) {
-            curHistory = new MonthlyHistory(uid);
-            insertHistory(curHistory);
+        if(curHistory != null) {
+            GregorianCalendar calendar = curHistory.monthToCalendar();
+            GregorianCalendar curCalendar = new GregorianCalendar();
+            if (curCalendar.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)
+                   || curCalendar.get(Calendar.MONTH) == calendar.get(Calendar.MONTH)) {
+                return curHistory;
+            } else {
+                return null;
+            }
         }
-        return curHistory;
+        return null;
     }
+
+
 }

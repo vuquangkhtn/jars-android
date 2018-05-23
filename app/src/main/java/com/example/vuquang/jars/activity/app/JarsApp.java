@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 
+import com.example.vuquang.jars.activity.data.db.model.MonthlyHistory;
 import com.example.vuquang.jars.activity.userlogin.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,7 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class JarsApp extends Application{
     private static JarsApp instance;
 
-    private long totalIncome = 10000;
+    private MonthlyHistory monthlyHistory;
 
     @Override
     public void onCreate() {
@@ -33,11 +34,11 @@ public class JarsApp extends Application{
         return Typeface.createFromAsset(getAssets(),  path);
     }
 
-    public long getTotalIncome() {
-        return totalIncome;
+    public MonthlyHistory getMonthlyHistory() {
+        return monthlyHistory;
     }
 
-    public void setTotalIncome(long totalIncome) {
-        this.totalIncome = totalIncome;
+    public void setMonthlyHistory(MonthlyHistory monthlyHistory) {
+        this.monthlyHistory = monthlyHistory;
     }
 }

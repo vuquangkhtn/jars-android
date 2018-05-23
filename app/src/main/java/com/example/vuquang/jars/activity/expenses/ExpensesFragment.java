@@ -10,9 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vuquang.jars.R;
+import com.example.vuquang.jars.activity.data.db.model.JarType;
 import com.example.vuquang.jars.activity.data.db.model.MonthlyHistory;
 import com.example.vuquang.jars.activity.expenses.addexpense.AddExpenseFragment;
 import com.example.vuquang.jars.activity.expenses.tabview.MainTabAdapter;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Created by CPU10584-local on 09-Apr-18.
@@ -53,6 +58,7 @@ public class ExpensesFragment extends Fragment {
 
         mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
         mTabAdapter = new MainTabAdapter(getActivity().getSupportFragmentManager(), getContext());
+        mTabAdapter.setData(new ArrayList<JarType>(Arrays.asList(JarType.values())));
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(mTabAdapter);
 

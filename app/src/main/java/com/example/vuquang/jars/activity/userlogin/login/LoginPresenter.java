@@ -2,12 +2,17 @@ package com.example.vuquang.jars.activity.userlogin.login;
 
 import android.support.annotation.NonNull;
 
+import com.example.vuquang.jars.activity.app.JarsApp;
 import com.example.vuquang.jars.activity.base.BasePresenter;
 import com.example.vuquang.jars.activity.data.DataManager;
+import com.example.vuquang.jars.activity.data.db.model.MonthlyHistory;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by VuQuang on 5/15/2018.
@@ -26,10 +31,26 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        getMvpView().hideLoading();
                         if (task.isSuccessful()) {
                             getMvpView().goToMain();
                         }
+                        getDataManager().getHistoryEndPoint().addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                getMvpView().hideLoading();
+                                MonthlyHistory monthlyHistory = getDataManager().getMonthlyHistoryFrom(dataSnapshot);
+                                if(monthlyHistory != null) {
+                                    JarsApp.getApp().setMonthlyHistory(monthlyHistory);
+                                } else {
+                                    getDataManager().createHistory();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

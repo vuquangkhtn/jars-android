@@ -14,16 +14,24 @@ import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.expenses.filter.FilterExpenseFragment;
 import com.example.vuquang.jars.activity.data.db.model.JarType;
 
+import java.util.List;
+
 /**
  * Created by CPU10584-local on 09-Apr-18.
  */
 
 public class MainTabAdapter extends FragmentPagerAdapter {
     private Context mContext;
+    private List<JarType> jarTypes;
 
     public MainTabAdapter(FragmentManager fm, Context context) {
         super(fm);
         mContext = context;
+    }
+
+    public void setData(List<JarType> jarTypes) {
+        jarTypes = jarTypes;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -37,12 +45,15 @@ public class MainTabAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return JarType.values().length;
+        if (jarTypes != null) {
+            return jarTypes.size();
+        }
+        return 0;
     }
 
     public View getCustomTabView(int position) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.layout_tab_item, null);
-        JarType type = JarType.values()[position];
+        JarType type = jarTypes.get(position);
         ImageView imvIcon = (ImageView) v.findViewById(R.id.imv_tab_icon);
         imvIcon.setImageResource(type.getResIdIcon());
         TextView tvTabName = (TextView) v.findViewById(R.id.tv_tab_name);

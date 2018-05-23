@@ -10,4 +10,6 @@ public interface LoginMvpView extends MvpView {
     void goToMain();
     void goToSignUpAct();
     void showSnackBar(String message);
+
+    void goToSetting();
 }

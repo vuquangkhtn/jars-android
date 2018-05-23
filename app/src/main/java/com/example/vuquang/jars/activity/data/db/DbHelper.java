@@ -33,4 +33,8 @@ public interface DbHelper {
     MonthlyHistory getMonthlyHistoryFrom(DataSnapshot dataSnapshot);
 
     String insertExpense(int userId);
+
+    public String createHistory();
+
+    Task<Void> updateHistory(MonthlyHistory monthlyHistory);
 }

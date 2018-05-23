@@ -22,7 +22,7 @@ public class MonthlyHistory {
         this.userId = null;
         GregorianCalendar calendar = new GregorianCalendar();
         currentMonth = calendar.getTimeInMillis();
-        monthlyIncome = JarsApp.getApp().getTotalIncome();
+        monthlyIncome = 0;
         expenseList = new ArrayList<>();
     }
 
@@ -30,7 +30,7 @@ public class MonthlyHistory {
         this.userId = userId;
         GregorianCalendar calendar = new GregorianCalendar();
         currentMonth = calendar.getTimeInMillis();
-        monthlyIncome = JarsApp.getApp().getTotalIncome();
+        monthlyIncome = 0;
         expenseList = new ArrayList<>();
     }
 

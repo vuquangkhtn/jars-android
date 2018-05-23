@@ -36,6 +36,16 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
+    public String createHistory() {
+        return appDao.getHistoryDao().createHistory();
+    }
+
+    @Override
+    public Task<Void>  updateHistory(MonthlyHistory monthlyHistory) {
+        return appDao.getHistoryDao().updateHistory(monthlyHistory);
+    }
+
+    @Override
     public boolean isLogined() {
         return appDao.getUserDao().isLogined();
     }

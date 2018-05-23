@@ -1,5 +1,6 @@
 package com.example.vuquang.jars.activity.statistics;
 
+import com.example.vuquang.jars.activity.app.JarsApp;
 import com.example.vuquang.jars.activity.base.BasePresenter;
 import com.example.vuquang.jars.activity.data.DataManager;
 import com.example.vuquang.jars.activity.data.db.model.MonthlyHistory;
@@ -19,21 +20,8 @@ public class StatisticsPresenter<V extends StatisticsMvpView> extends BasePresen
 
     @Override
     public void onViewPrepared() {
-        getMvpView().showLoading();
-        getDataManager().getHistoryEndPoint().addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                getMvpView().hideLoading();
-                MonthlyHistory history = getDataManager().getMonthlyHistoryFrom(dataSnapshot);
-                getMvpView().updateUI(history);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                getMvpView().hideLoading();
-                getMvpView().showToast(databaseError.getMessage());
-
-            }
-        });
+        MonthlyHistory history = JarsApp.getApp().getMonthlyHistory();
+        getMvpView().updateUI(history);
     }
 }
