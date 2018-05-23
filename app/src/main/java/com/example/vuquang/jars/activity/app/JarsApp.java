@@ -15,8 +15,6 @@ import com.google.firebase.auth.FirebaseUser;
  */
 
 public class JarsApp extends Application{
-    public static final String ACTION_LOGOUT = "ACTION_LOGOUT";
-    private FirebaseAuth mAuth;
     private static JarsApp instance;
 
     private long totalIncome = 10000;
@@ -25,7 +23,6 @@ public class JarsApp extends Application{
     public void onCreate() {
         super.onCreate();
         instance = this;
-        mAuth = FirebaseAuth.getInstance();
     }
 
     public static JarsApp getApp() {

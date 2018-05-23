@@ -19,16 +19,16 @@ public class MonthlyHistory {
     public List<Expense> expenseList;
 
     public MonthlyHistory() {
-        GregorianCalendar calendar = new GregorianCalendar();
         this.userId = null;
+        GregorianCalendar calendar = new GregorianCalendar();
         currentMonth = calendar.getTimeInMillis();
         monthlyIncome = JarsApp.getApp().getTotalIncome();
         expenseList = new ArrayList<>();
     }
 
     public MonthlyHistory(String userId) {
-        GregorianCalendar calendar = new GregorianCalendar();
         this.userId = userId;
+        GregorianCalendar calendar = new GregorianCalendar();
         currentMonth = calendar.getTimeInMillis();
         monthlyIncome = JarsApp.getApp().getTotalIncome();
         expenseList = new ArrayList<>();

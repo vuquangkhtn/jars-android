@@ -106,6 +106,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     private void setDefaultFragment() {
         txtTitle.setText(getResources().getString(R.string.expenses_name));
         // set default fragment
+        navigationView.setCheckedItem(R.id.nav_expenses);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fragment_container, new ExpensesFragment()).commit();
     }
