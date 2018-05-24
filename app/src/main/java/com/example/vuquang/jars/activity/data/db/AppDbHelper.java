@@ -1,6 +1,7 @@
 package com.example.vuquang.jars.activity.data.db;
 
 import com.example.vuquang.jars.activity.data.db.dao.AppDao;
+import com.example.vuquang.jars.activity.data.db.model.Expense;
 import com.example.vuquang.jars.activity.data.db.model.MonthlyHistory;
 import com.example.vuquang.jars.activity.data.db.model.User;
 import com.google.android.gms.tasks.Task;
@@ -31,11 +32,6 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
-    public String insertExpense(int userId) {
-        return null;
-    }
-
-    @Override
     public String createHistory() {
         return appDao.getHistoryDao().createHistory();
     }
@@ -43,6 +39,16 @@ public class AppDbHelper implements DbHelper {
     @Override
     public Task<Void>  updateHistory(MonthlyHistory monthlyHistory) {
         return appDao.getHistoryDao().updateHistory(monthlyHistory);
+    }
+
+    @Override
+    public DatabaseReference getExpenseEndPoint(String historyId) {
+        return appDao.getExpenseDao().getExpenseEndPoint(historyId);
+    }
+
+    @Override
+    public Task<Void> insertExpense(Expense expense, String historyId) {
+        return appDao.getExpenseDao().insertExpense(expense, historyId);
     }
 
     @Override

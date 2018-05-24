@@ -1,5 +1,6 @@
 package com.example.vuquang.jars.activity.data.db;
 
+import com.example.vuquang.jars.activity.data.db.model.Expense;
 import com.example.vuquang.jars.activity.data.db.model.MonthlyHistory;
 import com.example.vuquang.jars.activity.data.db.model.User;
 import com.google.android.gms.tasks.Task;
@@ -34,9 +35,11 @@ public interface DbHelper {
 
     MonthlyHistory getMonthlyHistoryFrom(DataSnapshot dataSnapshot);
 
-    String insertExpense(int userId);
-
     public String createHistory();
 
     Task<Void> updateHistory(MonthlyHistory monthlyHistory);
+
+    public DatabaseReference getExpenseEndPoint(String historyId);
+
+    public Task<Void> insertExpense(Expense expense, String historyId);
 }

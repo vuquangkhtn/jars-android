@@ -30,7 +30,7 @@ public class MainTabAdapter extends FragmentPagerAdapter {
     }
 
     public void setData(List<JarType> jarTypes) {
-        jarTypes = jarTypes;
+        this.jarTypes = jarTypes;
         notifyDataSetChanged();
     }
 

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.vuquang.jars.R;
+import com.example.vuquang.jars.activity.app.JarsApp;
 import com.example.vuquang.jars.activity.base.BaseFragment;
 import com.example.vuquang.jars.activity.data.AppDataManager;
 import com.example.vuquang.jars.activity.statistics.StatisticsMvpView;
@@ -47,6 +48,10 @@ public class SettingsFragment extends BaseFragment implements SettingMvpView {
     protected void setUp(View view) {
         edtMonthlyIncome = view.findViewById(R.id.edt_total);
         btnSave = view.findViewById(R.id.btn_save);
+        long income = JarsApp.getApp().getMonthlyHistory().monthlyIncome;
+        if(income > 0) {
+            edtMonthlyIncome.setText(String.valueOf(income));
+        }
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override

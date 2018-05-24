@@ -58,11 +58,6 @@ public class StatisticsFragment extends BaseFragment implements StatisticsMvpVie
     }
 
     @Override
-    public void showToast(String message) {
-        Toast.makeText(this.getContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     protected void setUp(View view) {
         mTvMonth = view.findViewById(R.id.tv_month);
         mTvYear = view.findViewById(R.id.tv_year);

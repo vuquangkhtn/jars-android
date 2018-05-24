@@ -9,5 +9,4 @@ import com.example.vuquang.jars.activity.data.db.model.MonthlyHistory;
 
 public interface StatisticsMvpView extends MvpView {
     void updateUI(MonthlyHistory history);
-    void showToast(String message);
 }

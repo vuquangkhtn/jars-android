@@ -1,6 +1,7 @@
 package com.example.vuquang.jars.activity.expenses.addexpense;
 
 import android.app.Dialog;
+import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,9 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
 import com.example.vuquang.jars.R;
+import com.example.vuquang.jars.activity.data.db.model.JarType;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by CPU10584-local on 09-Apr-18.
@@ -24,15 +35,17 @@ public class AddExpenseFragment extends DialogFragment {
     private static final String TAG = "AddExpenseFragment";
     private ImageButton imbMenu, imbBack, imbHelp;
 
+    private EditText edtAmount, edtTitle;
+    private Spinner spinJarType;
+    private Button btnAddExpense;
+
     public static void show(FragmentManager fm) {
         AddExpenseFragment dialog = newInstance();
         dialog.show(fm,TAG);
     }
 
     private static AddExpenseFragment newInstance() {
-        Bundle args = new Bundle();
         AddExpenseFragment dialog = new AddExpenseFragment();
-        dialog.setArguments(args);
         return dialog;
     }
 
@@ -67,6 +80,26 @@ public class AddExpenseFragment extends DialogFragment {
 
         imbHelp = view.findViewById(R.id.imv_navi_help);
         imbHelp.setVisibility(View.GONE);
+
+        edtAmount = view.findViewById(R.id.edt_amount);
+        edtTitle = view.findViewById(R.id.edt_title);
+
+        spinJarType = view.findViewById(R.id.spin_jar_type);
+        List<String> typeList = new ArrayList<>(Arrays.asList(JarType.nameList));
+        typeList.remove(typeList.size()-1);//remove all type
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+                getContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                typeList);
+        spinJarType.setAdapter(spinnerArrayAdapter);
+
+        btnAddExpense = view.findViewById(R.id.btn_add_expenses);
+        btnAddExpense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override

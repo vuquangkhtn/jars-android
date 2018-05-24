@@ -2,6 +2,7 @@ package com.example.vuquang.jars.activity.data.db.dao;
 
 import com.example.vuquang.jars.activity.data.db.model.Expense;
 import com.example.vuquang.jars.activity.utils.KeyPref;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
@@ -27,11 +28,10 @@ public class ExpenseDao {
                 .child(KeyPref.EXPENSE_KEY);
     }
 
-    public String insertExpense(Expense expense, String historyId) {
+    public Task<Void> insertExpense(Expense expense, String historyId) {
         DatabaseReference expenseEndPoint = getExpenseEndPoint(historyId);
         String expenseId = expenseEndPoint.push().getKey();
         expense.expenseId = expenseId;
-        expenseEndPoint.child(expenseId).setValue(expense);
-        return expenseId;
+        return expenseEndPoint.child(expenseId).setValue(expense);
     }
 }
