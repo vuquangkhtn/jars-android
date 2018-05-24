@@ -26,6 +26,8 @@ public interface DbHelper {
 
     Task<AuthResult> signIn(String email, String password);
 
+    Task<AuthResult> signUp(String email, String password);
+
     FirebaseAuth signOut();
 
     DatabaseReference getHistoryEndPoint();

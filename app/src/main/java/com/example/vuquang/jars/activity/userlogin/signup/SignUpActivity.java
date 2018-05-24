@@ -15,7 +15,10 @@ import android.widget.Toast;
 
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.base.BaseActivity;
+import com.example.vuquang.jars.activity.base.MvpView;
+import com.example.vuquang.jars.activity.data.AppDataManager;
 import com.example.vuquang.jars.activity.data.db.AppDbHelper;
+import com.example.vuquang.jars.activity.data.db.model.User;
 import com.example.vuquang.jars.activity.userlogin.login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -29,11 +32,10 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by VuQuang on 4/9/2018.
  */
 
-public class SignUpActivity extends BaseActivity {
+public class SignUpActivity extends BaseActivity implements SignUpMvpView{
     private static final String TAG = "SignUpActivity";
 
-    private FirebaseAuth mAuth;
-    private AppDbHelper dbHelper;
+    private SignUpPresenter mPresenter;
 
     private EditText mEdtEmail, mEdtPassword, mEdtConfirmPass;
     private Button mBtnCreateAcc;
@@ -44,14 +46,18 @@ public class SignUpActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_acc);
 
-        mAuth = FirebaseAuth.getInstance();
-        dbHelper = new AppDbHelper(FirebaseDatabase.getInstance().getReference(), mAuth);
+        mPresenter = new SignUpPresenter(new AppDataManager(
+                FirebaseDatabase.getInstance().getReference(),
+                FirebaseAuth.getInstance()
+        ));
+
+        mPresenter.onAttach(SignUpActivity.this);
 
         mBtnNaviBack = findViewById(R.id.imv_navi_back);
         mBtnNaviBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToLogin();
+                mPresenter.onNaviBackClicked();
             }
         });
 
@@ -59,11 +65,9 @@ public class SignUpActivity extends BaseActivity {
         mBtnCreateAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isValid()) {
-                    signUp();
-                } else {
-                    Toast.makeText(SignUpActivity.this, "Fill required", Toast.LENGTH_SHORT).show();
-                }
+                String email = mEdtEmail.getText().toString();
+                String password = mEdtPassword.getText().toString();
+                mPresenter.onCreateAccClicked(email, password);
             }
         });
 
@@ -81,7 +85,7 @@ public class SignUpActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                checkAllEdtFilled();
+                mPresenter.checkAllEditTextFilled();
             }
         });
         
@@ -99,7 +103,7 @@ public class SignUpActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                checkAllEdtFilled();
+                mPresenter.checkAllEditTextFilled();
             }
         });
 
@@ -117,14 +121,15 @@ public class SignUpActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                checkAllEdtFilled();
+                mPresenter.checkAllEditTextFilled();
             }
         });
 
-        checkAllEdtFilled();
+        mPresenter.checkAllEditTextFilled();
     }
 
-    private void checkAllEdtFilled() {
+    @Override
+    public void checkAllEdtFilled() {
         if(!TextUtils.isEmpty(mEdtEmail.getText())
                 && !TextUtils.isEmpty(mEdtPassword.getText())
                 && !TextUtils.isEmpty(mEdtConfirmPass.getText())) {
@@ -134,67 +139,15 @@ public class SignUpActivity extends BaseActivity {
         }
     }
 
-    private void goToLogin() {
+    @Override
+    public void goToLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         finish();
     }
 
-    private void signUp() {
-        Log.d(TAG, "signUp");
-        if (!validateForm()) {
-            return;
-        }
-
-        showLoading();
-        String email = mEdtEmail.getText().toString();
-        String password = mEdtPassword.getText().toString();
-
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "createUser:onComplete:" + task.isSuccessful());
-                        hideLoading();
-
-                        if (task.isSuccessful()) {
-                            onAuthSuccess(task.getResult().getUser());
-                        } else {
-                            Toast.makeText(SignUpActivity.this, "Sign Up Failed",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                })
-                .addOnFailureListener(this, new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SignUpActivity.this, "Sign Up Failed",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    private void onAuthSuccess(FirebaseUser user) {
-        String username = usernameFromEmail(user.getEmail());
-
-        // Write new user
-        dbHelper.insertUser(user.getUid(), username, user.getEmail());
-
-        // Go to MainActivity
-        goToLogin();
-        Toast.makeText(SignUpActivity.this, "Sign Up Successful",
-                Toast.LENGTH_SHORT).show();
-    }
-
-    private String usernameFromEmail(String email) {
-        if (email.contains("@")) {
-            return email.split("@")[0];
-        } else {
-            return email;
-        }
-    }
-
+    @Override
     public boolean isValid() {
         if(mBtnCreateAcc.isEnabled()
                 && validateForm()
@@ -204,7 +157,8 @@ public class SignUpActivity extends BaseActivity {
         return false;
     }
 
-    private boolean validateForm() {
+    @Override
+    public boolean validateForm() {
         boolean result = true;
         if (TextUtils.isEmpty(mEdtConfirmPass.getText().toString())) {
             mEdtConfirmPass.setError("Required");

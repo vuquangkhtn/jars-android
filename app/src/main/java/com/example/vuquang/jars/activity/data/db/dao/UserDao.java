@@ -53,6 +53,10 @@ public class UserDao {
         return mAuth;
     }
 
+    public Task<AuthResult> signUp(String email, String password) {
+        return mAuth.createUserWithEmailAndPassword(email, password);
+    }
+
     public String getUsername() {
         String email = mAuth.getCurrentUser().getEmail();
         if(email == null) {

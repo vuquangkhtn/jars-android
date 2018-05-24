@@ -56,6 +56,11 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
+    public Task<AuthResult> signUp(String email, String password) {
+        return appDao.getUserDao().signUp(email, password);
+    }
+
+    @Override
     public FirebaseAuth signOut() {
         return appDao.getUserDao().signOut();
     }
