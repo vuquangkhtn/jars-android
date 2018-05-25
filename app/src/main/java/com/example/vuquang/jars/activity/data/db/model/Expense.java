@@ -13,23 +13,31 @@ public class Expense {
     public long amount;
     public String title;
     private long createdAt;
-    private int jarType;
+    private long jarType;
 
-    public JarType getType() {
-        return JarType.values()[jarType];
+    public Expense() {
     }
 
-    public void setJarType(JarType type) {
-        jarType = type.getId();
+    public Expense(long amount, String title, long createdAt, int jarType) {
+        this.amount = amount;
+        this.title = title;
+        this.createdAt = createdAt;
+        this.jarType = jarType;
+    }
+
+    public JarType calculateType() {
+        return JarType.values()[(int)jarType];
     }
 
     public void setCreatedTime(GregorianCalendar calendar) {
         createdAt = calendar.getTimeInMillis();
     }
 
-    public GregorianCalendar getCreatedTimeInMillis() {
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTimeInMillis(createdAt);
-        return calendar;
+    public long getCreatedAt() {
+        return createdAt;
+    }
+
+    public int getJarType() {
+        return (int)jarType;
     }
 }

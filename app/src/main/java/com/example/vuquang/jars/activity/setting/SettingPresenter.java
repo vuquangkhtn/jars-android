@@ -29,7 +29,12 @@ public class SettingPresenter<V extends SettingMvpView> extends BasePresenter<V>
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 getMvpView().hideLoading();
-                getMvpView().showMessage("Update successful!");
+                if(task.isSuccessful()) {
+                    getMvpView().showMessage("Update successful!");
+                } else {
+                    getMvpView().showMessage("Update failed");
+
+                }
             }
         });
 

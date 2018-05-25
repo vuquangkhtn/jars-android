@@ -55,7 +55,7 @@ public class MonthlyHistory {
             List<Expense> list = new ArrayList<>();
             for (Expense expense :
                     expenseList) {
-                if(expense.getType() == type) {
+                if(expense.calculateType() == type) {
                     list.add(expense);
                 }
             }

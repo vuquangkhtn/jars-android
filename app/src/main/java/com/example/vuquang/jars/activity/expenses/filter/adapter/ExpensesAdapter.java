@@ -38,7 +38,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
     @Override
     public void onBindViewHolder(ExpensesHolder holder, int position) {
         Expense expense = expenseList.get(position);
-        holder.imvIcon.setImageResource(expense.getType().getResIdIcon());
+        holder.imvIcon.setImageResource(expense.calculateType().getResIdIcon());
         holder.tvName.setText(expense.title);
         holder.tvAmount.setText(String.valueOf(expense.amount));
     }

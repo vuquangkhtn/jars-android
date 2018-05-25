@@ -1,6 +1,7 @@
 package com.example.vuquang.jars.activity.data.db.dao;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.vuquang.jars.activity.base.BaseFragment;
 import com.example.vuquang.jars.activity.data.db.model.Expense;
@@ -59,6 +60,10 @@ public class HistoryDao {
         MonthlyHistory curHistory = null;
         for (DataSnapshot note: dataSnapshot.getChildren()){
             MonthlyHistory history = note.getValue(MonthlyHistory.class);
+            for (DataSnapshot expenseNote: note.child(KeyPref.EXPENSE_KEY).getChildren()) {
+                Expense expense = expenseNote.getValue(Expense.class);
+                history.expenseList.add(expense);
+            }
             if(history != null && history.userId.equals(uid)) {
                 if(curHistory == null) {
                     curHistory = history;

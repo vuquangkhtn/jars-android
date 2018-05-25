@@ -34,6 +34,14 @@ public enum JarType {
         return id;
     }
 
+    public static int getIdFromName(String name) {
+        for (int i = 0; i < nameList.length; i++) {
+            if (name.equals(nameList[i])) {
+                return i;
+            }
+        }
+        return -1;
+    }
     public String getName() {
         return nameList[id];
     }
