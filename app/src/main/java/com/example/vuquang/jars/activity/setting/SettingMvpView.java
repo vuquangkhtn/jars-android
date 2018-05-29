@@ -8,4 +8,7 @@ import com.example.vuquang.jars.activity.base.MvpView;
 
 public interface SettingMvpView extends MvpView {
 
+    void updateIncome(long monthlyIncome);
+
+    void goToMain();
 }

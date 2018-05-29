@@ -19,7 +19,6 @@ public class MonthlyHistory {
     public List<Expense> expenseList;
 
     public MonthlyHistory() {
-        this.userId = null;
         GregorianCalendar calendar = new GregorianCalendar();
         currentMonth = calendar.getTimeInMillis();
         monthlyIncome = 0;

@@ -3,17 +3,13 @@ package com.example.vuquang.jars.activity.data.db;
 import com.example.vuquang.jars.activity.data.db.dao.AppDao;
 import com.example.vuquang.jars.activity.data.db.model.Expense;
 import com.example.vuquang.jars.activity.data.db.model.MonthlyHistory;
-import com.example.vuquang.jars.activity.data.db.model.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 
-import java.util.List;
-import java.util.concurrent.Callable;
-
-import io.reactivex.Observable;
+import java.util.GregorianCalendar;
 
 /**
  * Created by VuQuang on 5/14/2018.
@@ -37,8 +33,8 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
-    public Task<Void>  updateHistory(MonthlyHistory monthlyHistory) {
-        return appDao.getHistoryDao().updateHistory(monthlyHistory);
+    public Task<Void> updateMonthlyIncome(String historyId, Long value) {
+        return appDao.getHistoryDao().updateMonthlyIncome(historyId, value);
     }
 
     @Override
@@ -82,7 +78,7 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
-    public MonthlyHistory getMonthlyHistoryFrom(DataSnapshot dataSnapshot) {
-        return appDao.getHistoryDao().getMonthlyHistoryFrom(dataSnapshot);
+    public MonthlyHistory getMonthlyHistoryFrom(DataSnapshot dataSnapshot, GregorianCalendar month) {
+        return appDao.getHistoryDao().getMonthlyHistoryFrom(dataSnapshot, month);
     }
 }

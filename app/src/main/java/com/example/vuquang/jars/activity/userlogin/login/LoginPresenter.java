@@ -14,6 +14,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.GregorianCalendar;
+
 /**
  * Created by VuQuang on 5/15/2018.
  */
@@ -32,25 +34,29 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            getMvpView().goToMain();
-                        }
-                        getDataManager().getHistoryEndPoint().addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                getMvpView().hideLoading();
-                                MonthlyHistory monthlyHistory = getDataManager().getMonthlyHistoryFrom(dataSnapshot);
-                                if(monthlyHistory != null) {
-                                    JarsApp.getApp().setMonthlyHistory(monthlyHistory);
-                                } else {
-                                    getDataManager().createHistory();
+                            getDataManager().getHistoryEndPoint().addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    getMvpView().hideLoading();
+                                    MonthlyHistory monthlyHistory = getDataManager()
+                                            .getMonthlyHistoryFrom(dataSnapshot, new GregorianCalendar());
+                                    if(monthlyHistory != null) {
+                                        JarsApp.getApp().setHistoryId(monthlyHistory.historyId);
+                                    } else {
+                                        getDataManager().createHistory();
+                                    }
+
+                                    getMvpView().goToMain();
                                 }
-                            }
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    getMvpView().showMessage(databaseError.getMessage());
+                                }
+                            });
+                        } else {
+                            getMvpView().showMessage("Login failed");
+                        }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

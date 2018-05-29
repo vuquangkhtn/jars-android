@@ -42,9 +42,9 @@ public class HistoryDao {
         return hisId;
     }
 
-    public Task<Void> updateHistory(MonthlyHistory newHistory) {
-        DatabaseReference historyEndPoint = mDatabase.child(KeyPref.HISTORY_KEY).child(newHistory.historyId);
-        return historyEndPoint.setValue(newHistory);
+    public Task<Void> updateMonthlyIncome(String historyId, Long incomeVal) {
+        DatabaseReference historyEndPoint = mDatabase.child(KeyPref.HISTORY_KEY).child(historyId);
+        return historyEndPoint.child("monthlyIncome").setValue(incomeVal);
     }
 
     public String createHistory() {
@@ -55,9 +55,9 @@ public class HistoryDao {
         return mDatabase.child(KeyPref.HISTORY_KEY);
     }
 
-    public MonthlyHistory getMonthlyHistoryFrom(DataSnapshot dataSnapshot) {
+    public MonthlyHistory getMonthlyHistoryFrom(DataSnapshot dataSnapshot, GregorianCalendar calendar) {
         String uid = mAuth.getUid();
-        MonthlyHistory curHistory = null;
+        MonthlyHistory resultHistory = null;
         for (DataSnapshot note: dataSnapshot.getChildren()){
             MonthlyHistory history = note.getValue(MonthlyHistory.class);
             for (DataSnapshot expenseNote: note.child(KeyPref.EXPENSE_KEY).getChildren()) {
@@ -65,21 +65,20 @@ public class HistoryDao {
                 history.expenseList.add(expense);
             }
             if(history != null && history.userId.equals(uid)) {
-                if(curHistory == null) {
-                    curHistory = history;
+                if(resultHistory == null) {
+                    resultHistory = history;
                 } else {
-                    if(history.currentMonth > curHistory.currentMonth) {
-                        curHistory = history;
+                    if(history.currentMonth > resultHistory.currentMonth) {
+                        resultHistory = history;
                     }
                 }
             }
         }
-        if(curHistory != null) {
-            GregorianCalendar calendar = curHistory.monthToCalendar();
-            GregorianCalendar curCalendar = new GregorianCalendar();
-            if (curCalendar.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)
-                   || curCalendar.get(Calendar.MONTH) == calendar.get(Calendar.MONTH)) {
-                return curHistory;
+        if(resultHistory != null) {
+            GregorianCalendar monthFromHis = resultHistory.monthToCalendar();
+            if (calendar.get(Calendar.YEAR) == monthFromHis.get(Calendar.YEAR)
+                   || calendar.get(Calendar.MONTH) == monthFromHis.get(Calendar.MONTH)) {
+                return resultHistory;
             } else {
                 return null;
             }

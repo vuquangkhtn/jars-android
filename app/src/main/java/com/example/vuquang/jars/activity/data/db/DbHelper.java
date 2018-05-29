@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -33,11 +34,11 @@ public interface DbHelper {
 
     DatabaseReference getHistoryEndPoint();
 
-    MonthlyHistory getMonthlyHistoryFrom(DataSnapshot dataSnapshot);
+    public MonthlyHistory getMonthlyHistoryFrom(DataSnapshot dataSnapshot, GregorianCalendar month);
 
     public String createHistory();
 
-    Task<Void> updateHistory(MonthlyHistory monthlyHistory);
+    Task<Void> updateMonthlyIncome(String historyId, Long value);
 
     public DatabaseReference getExpenseEndPoint(String historyId);
 

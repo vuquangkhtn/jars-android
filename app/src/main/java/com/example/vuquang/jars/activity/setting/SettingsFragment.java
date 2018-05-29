@@ -48,10 +48,7 @@ public class SettingsFragment extends BaseFragment implements SettingMvpView {
     protected void setUp(View view) {
         edtMonthlyIncome = view.findViewById(R.id.edt_total);
         btnSave = view.findViewById(R.id.btn_save);
-        long income = JarsApp.getApp().getMonthlyHistory().monthlyIncome;
-        if(income > 0) {
-            edtMonthlyIncome.setText(String.valueOf(income));
-        }
+        mPresenter.loadOldIncome();
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,5 +82,17 @@ public class SettingsFragment extends BaseFragment implements SettingMvpView {
         } else {
             btnSave.setEnabled(false);
         }
+    }
+
+    @Override
+    public void updateIncome(long monthlyIncome) {
+        if(monthlyIncome > 0) {
+            edtMonthlyIncome.setText(String.valueOf(monthlyIncome));
+        }
+    }
+
+    @Override
+    public void goToMain() {
+
     }
 }

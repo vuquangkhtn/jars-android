@@ -1,4 +1,4 @@
-package com.example.vuquang.jars.activity.expenses.filter.adapter;
+package com.example.vuquang.jars.activity.expenses.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

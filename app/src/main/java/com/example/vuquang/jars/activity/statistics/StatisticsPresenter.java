@@ -8,6 +8,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.GregorianCalendar;
+
 /**
  * Created by VuQuang on 5/14/2018.
  */
@@ -20,8 +22,24 @@ public class StatisticsPresenter<V extends StatisticsMvpView> extends BasePresen
 
     @Override
     public void onViewPrepared() {
+        getMvpView().showLoading();
+        getDataManager().getHistoryEndPoint().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                getMvpView().hideLoading();
+                MonthlyHistory monthlyHistory = getDataManager()
+                        .getMonthlyHistoryFrom(dataSnapshot, new GregorianCalendar());
+                if(monthlyHistory != null) {
+                    getMvpView().updateUI(monthlyHistory);
+                } else {
+                    getMvpView().showMessage("Load data failed");
+                }
+            }
 
-        MonthlyHistory history = JarsApp.getApp().getMonthlyHistory();
-        getMvpView().updateUI(history);
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

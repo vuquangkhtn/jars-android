@@ -8,4 +8,6 @@ import com.example.vuquang.jars.activity.base.MvpPresenter;
 
 public interface SettingMvpPresenter<V extends SettingMvpView> extends MvpPresenter<V> {
     void onSaveIncomeClicked(Long val);
+
+    void loadOldIncome();
 }

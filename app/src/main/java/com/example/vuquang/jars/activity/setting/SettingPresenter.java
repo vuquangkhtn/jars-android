@@ -12,6 +12,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.GregorianCalendar;
+
 /**
  * Created by VuQuang on 5/24/2018.
  */
@@ -23,14 +25,15 @@ public class SettingPresenter<V extends SettingMvpView> extends BasePresenter<V>
 
     @Override
     public void onSaveIncomeClicked(Long val) {
-        JarsApp.getApp().getMonthlyHistory().monthlyIncome = val;
         getMvpView().showLoading();
-        getDataManager().updateHistory(JarsApp.getApp().getMonthlyHistory()).addOnCompleteListener(new OnCompleteListener<Void>() {
+        getDataManager().updateMonthlyIncome(JarsApp.getApp().getHistoryId(), val)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 getMvpView().hideLoading();
                 if(task.isSuccessful()) {
                     getMvpView().showMessage("Update successful!");
+                    getMvpView().goToMain();
                 } else {
                     getMvpView().showMessage("Update failed");
 
@@ -38,5 +41,24 @@ public class SettingPresenter<V extends SettingMvpView> extends BasePresenter<V>
             }
         });
 
+    }
+
+    @Override
+    public void loadOldIncome() {
+        getDataManager().getHistoryEndPoint().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                MonthlyHistory monthlyHistory = getDataManager()
+                        .getMonthlyHistoryFrom(dataSnapshot, new GregorianCalendar());
+                if(monthlyHistory != null) {
+                    getMvpView().updateIncome(monthlyHistory.monthlyIncome);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

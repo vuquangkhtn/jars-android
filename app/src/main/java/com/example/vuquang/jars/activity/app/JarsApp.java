@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class JarsApp extends Application{
     private static JarsApp instance;
 
-    private MonthlyHistory monthlyHistory;
+    private String historyId;
 
     @Override
     public void onCreate() {
@@ -34,11 +34,11 @@ public class JarsApp extends Application{
         return Typeface.createFromAsset(getAssets(),  path);
     }
 
-    public MonthlyHistory getMonthlyHistory() {
-        return monthlyHistory;
+    public String getHistoryId() {
+        return historyId;
     }
 
-    public void setMonthlyHistory(MonthlyHistory monthlyHistory) {
-        this.monthlyHistory = monthlyHistory;
+    public void setHistoryId(String historyId) {
+        this.historyId = historyId;
     }
 }

@@ -173,8 +173,6 @@ public class AddExpenseFragment extends BaseDialog implements AddExpenseMvpView 
 
     @Override
     public void goToMain() {
-        Intent i = new Intent(getContext(), MainActivity.class);
-        startActivity(i);
         dismissDialog("AddExpense");
     }
 

@@ -8,6 +8,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.GregorianCalendar;
+
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
@@ -22,13 +24,14 @@ public class SplashPresenter <V extends SplashMvpView> extends BasePresenter<V> 
     private void decideNextActivity() {
         if (getDataManager().isLogined()) {
             getMvpView().showLoading();
-            getDataManager().getHistoryEndPoint().addValueEventListener(new ValueEventListener() {
+            getDataManager().getHistoryEndPoint().addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     getMvpView().hideLoading();
-                    MonthlyHistory monthlyHistory = getDataManager().getMonthlyHistoryFrom(dataSnapshot);
+                    MonthlyHistory monthlyHistory = getDataManager()
+                            .getMonthlyHistoryFrom(dataSnapshot, new GregorianCalendar());
                     if(monthlyHistory != null) {
-                        JarsApp.getApp().setMonthlyHistory(monthlyHistory);
+                        JarsApp.getApp().setHistoryId(monthlyHistory.historyId);
                     } else {
                         getDataManager().createHistory();
                     }
