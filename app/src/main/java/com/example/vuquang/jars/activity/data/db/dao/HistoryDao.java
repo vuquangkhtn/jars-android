@@ -77,7 +77,7 @@ public class HistoryDao {
         if(resultHistory != null) {
             GregorianCalendar monthFromHis = resultHistory.monthToCalendar();
             if (calendar.get(Calendar.YEAR) == monthFromHis.get(Calendar.YEAR)
-                   || calendar.get(Calendar.MONTH) == monthFromHis.get(Calendar.MONTH)) {
+                   && calendar.get(Calendar.MONTH) == monthFromHis.get(Calendar.MONTH)) {
                 return resultHistory;
             } else {
                 return null;
