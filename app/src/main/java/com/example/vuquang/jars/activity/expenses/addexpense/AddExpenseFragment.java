@@ -1,13 +1,10 @@
 package com.example.vuquang.jars.activity.expenses.addexpense;
 
 import android.app.Dialog;
-import android.content.Intent;
-import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -22,16 +19,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.base.BaseDialog;
-import com.example.vuquang.jars.activity.base.DialogMvpView;
 import com.example.vuquang.jars.activity.data.AppDataManager;
 import com.example.vuquang.jars.activity.data.db.model.JarType;
-import com.example.vuquang.jars.activity.main.MainActivity;
-import com.example.vuquang.jars.activity.setting.SettingPresenter;
-import com.example.vuquang.jars.activity.userlogin.NotAuthenAcitivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -120,8 +112,9 @@ public class AddExpenseFragment extends BaseDialog implements AddExpenseMvpView 
         typeList.remove(typeList.size()-1);//remove all type
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
                 getContext(),
-                android.R.layout.simple_spinner_dropdown_item,
+                R.layout.item_spinner,
                 typeList);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.item_spinner_dropdown);
         spinJarType.setAdapter(spinnerArrayAdapter);
 
         btnAddExpense = view.findViewById(R.id.btn_add_expenses);
