@@ -1,4 +1,6 @@
-package com.example.vuquang.jars.activity.expenses;
+package com.example.vuquang.jars.activity.expenses.showexpense;
+
+import android.view.View;
 
 import com.example.vuquang.jars.activity.base.MvpView;
 import com.example.vuquang.jars.activity.data.db.model.Expense;
@@ -13,4 +15,8 @@ public interface ExpenseMvpView extends MvpView {
     void setExpenseListBy(List<Expense> list);
 
     void setDefaultTab();
+
+    void switchToEmptyMode();
+
+    void switchToDataMode();
 }

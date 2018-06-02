@@ -12,4 +12,6 @@ public interface LoginMvpView extends MvpView {
     void showSnackBar(String message);
 
     void goToSetting();
+
+    void openSettingDialog();
 }

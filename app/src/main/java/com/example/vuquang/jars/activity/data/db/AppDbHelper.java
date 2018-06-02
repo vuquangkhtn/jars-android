@@ -28,8 +28,8 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
-    public String createHistory() {
-        return appDao.getHistoryDao().createHistory();
+    public String createHistory(long monthlyIncome) {
+        return appDao.getHistoryDao().createHistory(monthlyIncome);
     }
 
     @Override
@@ -81,4 +81,11 @@ public class AppDbHelper implements DbHelper {
     public MonthlyHistory getMonthlyHistoryFrom(DataSnapshot dataSnapshot, GregorianCalendar month) {
         return appDao.getHistoryDao().getMonthlyHistoryFrom(dataSnapshot, month);
     }
+
+    @Override
+    public MonthlyHistory getNearestHistory(DataSnapshot dataSnapshot) {
+        return appDao.getHistoryDao().getNearestHistory(dataSnapshot);
+    }
+
+
 }

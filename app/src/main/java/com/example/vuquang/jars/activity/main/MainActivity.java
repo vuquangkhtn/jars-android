@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.base.BaseActivity;
 import com.example.vuquang.jars.activity.data.AppDataManager;
-import com.example.vuquang.jars.activity.expenses.ExpensesFragment;
+import com.example.vuquang.jars.activity.expenses.showexpense.ExpensesFragment;
 import com.example.vuquang.jars.activity.setting.SettingsFragment;
 import com.example.vuquang.jars.activity.statistics.StatisticsFragment;
 import com.example.vuquang.jars.activity.userlogin.login.LoginActivity;

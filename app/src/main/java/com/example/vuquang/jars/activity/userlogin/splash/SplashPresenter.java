@@ -21,27 +21,25 @@ public class SplashPresenter <V extends SplashMvpView> extends BasePresenter<V> 
         super(dataManager);
     }
 
-    private void decideNextActivity() {
+    public void decideNextActivity() {
         if (getDataManager().isLogined()) {
-            getMvpView().showLoading();
             getDataManager().getHistoryEndPoint().addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    getMvpView().hideLoading();
                     MonthlyHistory monthlyHistory = getDataManager()
                             .getMonthlyHistoryFrom(dataSnapshot, new GregorianCalendar());
                     if(monthlyHistory != null) {
                         JarsApp.getApp().setHistoryId(monthlyHistory.historyId);
+                        getMvpView().goToMain();
                     } else {
-                        getDataManager().createHistory();
+                        getMvpView().openSettingDialog();
                     }
 
-                    getMvpView().goToMain();
                 }
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-
+                    getMvpView().showMessage(databaseError.getMessage());
                 }
             });
         } else {
@@ -52,6 +50,5 @@ public class SplashPresenter <V extends SplashMvpView> extends BasePresenter<V> 
     @Override
     public void onAttach(V mvpView) {
         super.onAttach(mvpView);
-        decideNextActivity();
     }
 }

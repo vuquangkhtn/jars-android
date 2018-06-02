@@ -1,4 +1,4 @@
-package com.example.vuquang.jars.activity.expenses;
+package com.example.vuquang.jars.activity.expenses.showexpense;
 
 import com.example.vuquang.jars.activity.base.BasePresenter;
 import com.example.vuquang.jars.activity.data.DataManager;
@@ -9,7 +9,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -46,10 +45,21 @@ public class ExpensePresenter<V extends ExpenseMvpView> extends BasePresenter<V>
     }
 
     @Override
-    public void OnTabSelected(int position) {
+    public void onTabSelected(int position) {
         if(history != null) {
-            getMvpView().setExpenseListBy(history.findExpensesListBy(JarType.values()[position]));
+            List<Expense> expenses = history.findExpensesListBy(JarType.values()[position]);
+            if(expenses.isEmpty()) {
+                getMvpView().switchToEmptyMode();
+            } else {
+                getMvpView().switchToDataMode();
+                getMvpView().setExpenseListBy(expenses);
+            }
 
         }
+    }
+
+    @Override
+    public void onDismissAddExpenseDialog() {
+        onTabSelected(JarType.values().length - 1);
     }
 }

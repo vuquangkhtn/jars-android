@@ -1,5 +1,6 @@
-package com.example.vuquang.jars.activity.expenses;
+package com.example.vuquang.jars.activity.expenses.showexpense;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -14,6 +15,7 @@ import com.example.vuquang.jars.activity.base.BaseFragment;
 import com.example.vuquang.jars.activity.data.AppDataManager;
 import com.example.vuquang.jars.activity.data.db.model.Expense;
 import com.example.vuquang.jars.activity.data.db.model.JarType;
+import com.example.vuquang.jars.activity.expenses.LayoutSwitcher;
 import com.example.vuquang.jars.activity.expenses.adapter.ExpensesAdapter;
 import com.example.vuquang.jars.activity.expenses.addexpense.AddExpenseFragment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +34,8 @@ public class ExpensesFragment extends BaseFragment implements ExpenseMvpView {
     ExpensesAdapter mAdapter;
     RecyclerView rvExpense;
     TabLayout mTabLayout;
+    AddExpenseFragment addExpenseFragment;
+    LayoutSwitcher layoutSwitcher;
 
     private ExpensePresenter<ExpenseMvpView> mPresenter;
 
@@ -40,7 +44,7 @@ public class ExpensesFragment extends BaseFragment implements ExpenseMvpView {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = View.inflate(getActivity(), R.layout.fragment_expenses, null);
-
+//        View viewContainer = view.findViewById(R.id.layout_container_rv);
         mPresenter = new ExpensePresenter<>(new AppDataManager(
                 FirebaseDatabase.getInstance().getReference(),
                 FirebaseAuth.getInstance()
@@ -52,11 +56,24 @@ public class ExpensesFragment extends BaseFragment implements ExpenseMvpView {
 
 
     private void startAddFragment() {
-        AddExpenseFragment.show(getActivity().getSupportFragmentManager());
+        addExpenseFragment.show(getActivity().getSupportFragmentManager(),"AddExpenseFragment");
     }
 
     @Override
     protected void setUp(View view) {
+        addExpenseFragment = AddExpenseFragment.newInstance();
+        addExpenseFragment.setDialogListener(new AddExpenseFragment.DialogListener() {
+            @Override
+            public void onDismissDialog(DialogInterface dialog) {
+                mPresenter.onDismissAddExpenseDialog();
+            }
+        });
+        layoutSwitcher = new LayoutSwitcher(view, R.id.rv_list_expense, R.id.layout_empty, new LayoutSwitcher.RetryButtonListener() {
+            @Override
+            public void onRetry() {
+                mPresenter.loadExpenseList();
+            }
+        });
         mFabAdd = view.findViewById(R.id.fab_add);
         mFabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +93,7 @@ public class ExpensesFragment extends BaseFragment implements ExpenseMvpView {
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                mPresenter.OnTabSelected(tab.getPosition());
+                mPresenter.onTabSelected(tab.getPosition());
             }
 
             @Override
@@ -89,7 +106,6 @@ public class ExpensesFragment extends BaseFragment implements ExpenseMvpView {
 
             }
         });
-
 
         rvExpense = view.findViewById(R.id.rv_list_expense);
         rvExpense.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -107,6 +123,17 @@ public class ExpensesFragment extends BaseFragment implements ExpenseMvpView {
 
     @Override
     public void setDefaultTab() {
+        mTabLayout.setSelected(false);
         mTabLayout.getTabAt(JarType.ALL.getId()).select();
+    }
+
+    @Override
+    public void switchToEmptyMode() {
+        layoutSwitcher.switchToEmptyMode();
+    }
+
+    @Override
+    public void switchToDataMode() {
+        layoutSwitcher.switchToDataMode();
     }
 }

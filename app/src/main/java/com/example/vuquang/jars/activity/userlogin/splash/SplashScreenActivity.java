@@ -10,6 +10,7 @@ import com.example.vuquang.jars.activity.app.JarsApp;
 import com.example.vuquang.jars.activity.base.MvpView;
 import com.example.vuquang.jars.activity.data.AppDataManager;
 import com.example.vuquang.jars.activity.main.MainActivity;
+import com.example.vuquang.jars.activity.setting.settingdialog.SettingDialog;
 import com.example.vuquang.jars.activity.userlogin.login.LoginActivity;
 import com.example.vuquang.jars.activity.userlogin.NotAuthenAcitivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +38,7 @@ public class SplashScreenActivity extends NotAuthenAcitivity implements SplashMv
                 FirebaseDatabase.getInstance().getReference(),
                 FirebaseAuth.getInstance()));
         presenter.onAttach(SplashScreenActivity.this);
+        presenter.decideNextActivity();
     }
 
     @Override
@@ -54,4 +56,8 @@ public class SplashScreenActivity extends NotAuthenAcitivity implements SplashMv
         finish();
     }
 
+    @Override
+    public void openSettingDialog() {
+        SettingDialog.show(getSupportFragmentManager());
+    }
 }

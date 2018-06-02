@@ -1,13 +1,8 @@
 package com.example.vuquang.jars.activity.data.db.dao;
 
-import android.support.annotation.NonNull;
-import android.util.Log;
-
-import com.example.vuquang.jars.activity.base.BaseFragment;
 import com.example.vuquang.jars.activity.data.db.model.Expense;
 import com.example.vuquang.jars.activity.data.db.model.MonthlyHistory;
 import com.example.vuquang.jars.activity.utils.KeyPref;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -47,8 +42,10 @@ public class HistoryDao {
         return historyEndPoint.child("monthlyIncome").setValue(incomeVal);
     }
 
-    public String createHistory() {
-        return insertHistory(init());
+    public String createHistory(long monthlyIncome) {
+        MonthlyHistory monthlyHistory = init();
+        monthlyHistory.monthlyIncome = monthlyIncome;
+        return insertHistory(monthlyHistory);
     }
 
     public DatabaseReference getHistoryEndPoint() {
@@ -57,33 +54,35 @@ public class HistoryDao {
 
     public MonthlyHistory getMonthlyHistoryFrom(DataSnapshot dataSnapshot, GregorianCalendar calendar) {
         String uid = mAuth.getUid();
-        MonthlyHistory resultHistory = null;
         for (DataSnapshot note: dataSnapshot.getChildren()){
             MonthlyHistory history = note.getValue(MonthlyHistory.class);
-            for (DataSnapshot expenseNote: note.child(KeyPref.EXPENSE_KEY).getChildren()) {
-                Expense expense = expenseNote.getValue(Expense.class);
-                history.expenseList.add(expense);
-            }
             if(history != null && history.userId.equals(uid)) {
-                if(resultHistory == null) {
-                    resultHistory = history;
+                GregorianCalendar monthFromHis = history.monthToCalendar();
+                if (calendar.get(Calendar.YEAR) == monthFromHis.get(Calendar.YEAR)
+                        && calendar.get(Calendar.MONTH) == monthFromHis.get(Calendar.MONTH)) {
+                    return history;
+                }
+            }
+        }
+        return null;
+    }
+
+    public MonthlyHistory getNearestHistory(DataSnapshot dataSnapshot) {
+        String uid = mAuth.getUid();
+        MonthlyHistory result = null;
+        for (DataSnapshot note: dataSnapshot.getChildren()){
+            MonthlyHistory history = note.getValue(MonthlyHistory.class);
+            if(history != null && history.userId.equals(uid)) {
+                if(result == null) {
+                    result = history;
                 } else {
-                    if(history.currentMonth > resultHistory.currentMonth) {
-                        resultHistory = history;
+                    if(result.currentMonth < history.currentMonth) {
+                        result = history;
                     }
                 }
             }
         }
-        if(resultHistory != null) {
-            GregorianCalendar monthFromHis = resultHistory.monthToCalendar();
-            if (calendar.get(Calendar.YEAR) == monthFromHis.get(Calendar.YEAR)
-                   && calendar.get(Calendar.MONTH) == monthFromHis.get(Calendar.MONTH)) {
-                return resultHistory;
-            } else {
-                return null;
-            }
-        }
-        return null;
+        return result;
     }
 
 

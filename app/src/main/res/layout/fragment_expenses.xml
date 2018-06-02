@@ -17,18 +17,23 @@
             app:tabSelectedTextColor="@android:color/white"
             app:tabMode="scrollable"
             app:tabIndicatorColor="@android:color/holo_blue_light" />
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:layout_below="@id/tab_layout"
             android:background="@android:color/darker_gray" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_list_expense"
+        <FrameLayout
+            android:id="@+id/layout_container_rv"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_height="match_parent">
+            <include layout="@layout/layout_empty"/>
+            <include layout="@layout/layout_error"/>
+            <include layout="@layout/layout_loading"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_list_expense"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton

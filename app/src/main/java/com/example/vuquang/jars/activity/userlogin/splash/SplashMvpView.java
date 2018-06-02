@@ -10,4 +10,6 @@ public interface SplashMvpView extends MvpView{
     void goToLoginActivity();
 
     void goToMain();
+
+    void openSettingDialog();
 }

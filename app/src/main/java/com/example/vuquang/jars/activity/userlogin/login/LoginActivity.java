@@ -16,6 +16,7 @@ import com.example.vuquang.jars.activity.base.BaseActivity;
 import com.example.vuquang.jars.activity.data.AppDataManager;
 import com.example.vuquang.jars.activity.main.MainActivity;
 import com.example.vuquang.jars.activity.setting.SettingsFragment;
+import com.example.vuquang.jars.activity.setting.settingdialog.SettingDialog;
 import com.example.vuquang.jars.activity.userlogin.NotAuthenAcitivity;
 import com.example.vuquang.jars.activity.userlogin.signup.SignUpActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -127,10 +128,15 @@ public class LoginActivity extends BaseActivity implements LoginMvpView{
 
     @Override
     public void goToSetting() {
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-        sendBroadcast(new Intent(NotAuthenAcitivity.ACTION_LOGIN));
-        finish();
+//        Intent i = new Intent(this, MainActivity.class);
+//        startActivity(i);
+//        sendBroadcast(new Intent(NotAuthenAcitivity.ACTION_LOGIN));
+//        finish();
+    }
+
+    @Override
+    public void openSettingDialog() {
+        SettingDialog.show(getSupportFragmentManager());
     }
 
     private void checkAllEdtFilled() {

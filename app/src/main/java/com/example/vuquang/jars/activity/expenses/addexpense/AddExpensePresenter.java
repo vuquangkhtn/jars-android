@@ -26,7 +26,7 @@ public class AddExpensePresenter<V extends AddExpenseMvpView> extends BasePresen
 
     @Override
     public void onBackPressed() {
-        getMvpView().dismissDialog("AddExpense");
+        getMvpView().goToMain();
     }
 
     @Override

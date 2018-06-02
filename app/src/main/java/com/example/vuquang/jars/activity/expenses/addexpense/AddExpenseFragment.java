@@ -1,6 +1,7 @@
 package com.example.vuquang.jars.activity.expenses.addexpense;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.base.BaseDialog;
 import com.example.vuquang.jars.activity.data.AppDataManager;
 import com.example.vuquang.jars.activity.data.db.model.JarType;
+import com.example.vuquang.jars.activity.main.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -43,16 +45,40 @@ public class AddExpenseFragment extends BaseDialog implements AddExpenseMvpView 
     private Spinner spinJarType;
     private Button btnAddExpense;
 
+    private DialogListener dialogListener;
     private AddExpensePresenter<AddExpenseMvpView> mPresenter;
+//
+//    public static void show(FragmentManager fm) {
+//        AddExpenseFragment dialog = newInstance();
+//        dialog.show(fm,TAG);
+//    }
 
-    public static void show(FragmentManager fm) {
-        AddExpenseFragment dialog = newInstance();
-        dialog.show(fm,TAG);
-    }
-
-    private static AddExpenseFragment newInstance() {
+    public static AddExpenseFragment newInstance() {
         AddExpenseFragment dialog = new AddExpenseFragment();
         return dialog;
+    }
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = new Dialog(getContext(), R.style.DialogNoAnimation);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+        return dialog;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = View.inflate(getActivity(), R.layout.dialog_add_expense, null);
+
+        mPresenter = new AddExpensePresenter<>(new AppDataManager(
+                FirebaseDatabase.getInstance().getReference(),
+                FirebaseAuth.getInstance()
+        ));
+
+        mPresenter.onAttach(AddExpenseFragment.this);
+        return view;
     }
 
     @Override
@@ -131,29 +157,6 @@ public class AddExpenseFragment extends BaseDialog implements AddExpenseMvpView 
         mPresenter.onCheckAllEdtFilled();
     }
 
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = new Dialog(getContext(), R.style.DialogNoAnimation);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
-        return dialog;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = View.inflate(getActivity(), R.layout.fragment_add_expense, null);
-
-        mPresenter = new AddExpensePresenter<>(new AppDataManager(
-                FirebaseDatabase.getInstance().getReference(),
-                FirebaseAuth.getInstance()
-        ));
-
-        mPresenter.onAttach(AddExpenseFragment.this);
-        return view;
-    }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -166,7 +169,7 @@ public class AddExpenseFragment extends BaseDialog implements AddExpenseMvpView 
 
     @Override
     public void goToMain() {
-        dismissDialog("AddExpense");
+        dismissDialog(TAG);
     }
 
     @Override
@@ -179,4 +182,19 @@ public class AddExpenseFragment extends BaseDialog implements AddExpenseMvpView 
             btnAddExpense.setEnabled(false);
         }
     }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        dialogListener.onDismissDialog(dialog);
+    }
+
+    public void setDialogListener(DialogListener dialogListener) {
+        this.dialogListener = dialogListener;
+    }
+
+    public interface DialogListener {
+        void onDismissDialog(DialogInterface dialog);
+    }
+
 }

@@ -36,7 +36,9 @@ public interface DbHelper {
 
     public MonthlyHistory getMonthlyHistoryFrom(DataSnapshot dataSnapshot, GregorianCalendar month);
 
-    public String createHistory();
+    public MonthlyHistory getNearestHistory(DataSnapshot dataSnapshot);
+
+    public String createHistory(long monthlyIncome);
 
     Task<Void> updateMonthlyIncome(String historyId, Long value);
 

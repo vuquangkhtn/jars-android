@@ -3,6 +3,7 @@ package com.example.vuquang.jars.activity.base;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class BaseActivity extends AppCompatActivity implements MvpView, BaseFragment.Callback {
     private ProgressDialog mProgressDialog;
-
+    private boolean doubleBackToExitPressedOnce;
     @Override
     public void showLoading() {
         hideLoading();
@@ -103,5 +104,24 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
     @Override
     public void onFragmentDetached(String tag) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        showMessage("Please click BACK again to exit");
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }

@@ -5,6 +5,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -16,13 +17,13 @@ public class MonthlyHistory {
     public String userId;
     public long currentMonth;
     public long monthlyIncome;
-    public List<Expense> expenseList;
+    public HashMap<String,Expense> expenseList;
 
     public MonthlyHistory() {
         GregorianCalendar calendar = new GregorianCalendar();
         currentMonth = calendar.getTimeInMillis();
         monthlyIncome = 0;
-        expenseList = new ArrayList<>();
+        expenseList = new HashMap<>();
     }
 
     public MonthlyHistory(String userId) {
@@ -30,12 +31,12 @@ public class MonthlyHistory {
         GregorianCalendar calendar = new GregorianCalendar();
         currentMonth = calendar.getTimeInMillis();
         monthlyIncome = 0;
-        expenseList = new ArrayList<>();
+        expenseList = new HashMap<>();
     }
 
     public long calculateTotalExpense() {
         long currentAmount = 0;
-        for (Expense expense:expenseList) {
+        for (Expense expense:expenseList.values()) {
             currentAmount += expense.amount;
         }
         return currentAmount;
@@ -49,11 +50,11 @@ public class MonthlyHistory {
 
     public List<Expense> findExpensesListBy(JarType type) {
         if(type == JarType.ALL) {
-            return expenseList;
+            return new ArrayList<>(expenseList.values());
         } else {
             List<Expense> list = new ArrayList<>();
             for (Expense expense :
-                    expenseList) {
+                    expenseList.values()) {
                 if(expense.calculateType() == type) {
                     list.add(expense);
                 }

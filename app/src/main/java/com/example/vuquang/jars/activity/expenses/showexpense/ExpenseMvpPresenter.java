@@ -1,4 +1,4 @@
-package com.example.vuquang.jars.activity.expenses;
+package com.example.vuquang.jars.activity.expenses.showexpense;
 
 import com.example.vuquang.jars.activity.base.MvpPresenter;
 
@@ -9,5 +9,7 @@ import com.example.vuquang.jars.activity.base.MvpPresenter;
 public interface ExpenseMvpPresenter<V extends ExpenseMvpView> extends MvpPresenter<V>{
     void loadExpenseList();
 
-    void OnTabSelected(int pos);
+    void onTabSelected(int pos);
+
+    void onDismissAddExpenseDialog();
 }

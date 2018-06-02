@@ -42,11 +42,10 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                                             .getMonthlyHistoryFrom(dataSnapshot, new GregorianCalendar());
                                     if(monthlyHistory != null) {
                                         JarsApp.getApp().setHistoryId(monthlyHistory.historyId);
+                                        getMvpView().goToMain();
                                     } else {
-                                        getDataManager().createHistory();
+                                        getMvpView().openSettingDialog();
                                     }
-
-                                    getMvpView().goToMain();
                                 }
 
                                 @Override
