@@ -25,6 +25,9 @@ import com.example.vuquang.jars.activity.userlogin.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 /**
  * Created by CPU10584-local on 09-Apr-18.
  */
@@ -109,7 +112,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     }
 
     private void setDefaultFragment() {
-        txtTitle.setText(getResources().getString(R.string.expenses_name));
+        setUpTitle();
         // set default fragment
         navigationView.setCheckedItem(R.id.nav_expenses);
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -118,6 +121,13 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         transaction.replace(R.id.fragment_container, new ExpensesFragment());
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    private void setUpTitle() {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+        String formatted = format1.format(cal.getTime());
+        txtTitle.setText(formatted);
     }
 
     @Override
@@ -152,7 +162,11 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
         // Set action bar title
-        txtTitle.setText(menuItem.getTitle());
+        if(menuItem.getItemId() == R.id.nav_expenses) {
+            setUpTitle();
+        } else {
+            txtTitle.setText(menuItem.getTitle());
+        }
         // Close the navigation mDrawer
         mDrawer.closeDrawers();
         mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, navigationView);

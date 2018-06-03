@@ -37,7 +37,7 @@ public class SignUpPresenter<V extends SignUpMvpView> extends BasePresenter<V> i
                         }
                     });
         } else {
-            getMvpView().showMessage("Fill required");
+            getMvpView().showMessage("password is unconfirmed");
         }
     }
 

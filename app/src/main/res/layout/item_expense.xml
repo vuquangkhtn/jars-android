@@ -14,29 +14,50 @@
         android:layout_alignParentTop="true"
         android:layout_width="@dimen/d70"
         android:layout_height="match_parent"
+        android:padding="@dimen/d10"
         android:layout_marginRight="15dp" />
     <LinearLayout
+        android:id="@+id/container_content"
         android:layout_toRightOf="@id/imv_icon"
         android:orientation="vertical"
         android:gravity="center_vertical"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/tv_title"
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:textSize="16sp"
-            android:textColor="@color/text_color"
-            android:text="Something"
-            />
+            android:textColor="@color/text_color"/>
         <TextView
             android:id="@+id/tv_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
-            android:textColor="@android:color/black"
-            android:text="2000 000 000"/>
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/d10"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textSize="16sp"
+            android:textColor="@color/text_color"/>
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
     </LinearLayout>
 </RelativeLayout>
