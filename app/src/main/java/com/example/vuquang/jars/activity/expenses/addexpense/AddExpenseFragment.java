@@ -2,6 +2,7 @@ package com.example.vuquang.jars.activity.expenses.addexpense;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -22,10 +23,12 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.example.vuquang.jars.R;
+import com.example.vuquang.jars.activity.base.BaseActivity;
 import com.example.vuquang.jars.activity.base.BaseDialog;
 import com.example.vuquang.jars.activity.data.AppDataManager;
 import com.example.vuquang.jars.activity.data.db.model.JarType;
 import com.example.vuquang.jars.activity.main.MainActivity;
+import com.example.vuquang.jars.activity.utils.NetworkUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -144,6 +147,10 @@ public class AddExpenseFragment extends BaseDialog implements AddExpenseMvpView 
         btnAddExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!NetworkUtils.isNetworkConnected(getContext())) {
+                    getContext().sendBroadcast(new Intent(BaseActivity.ACTION_CHECK_CONNECTION));
+                    return;
+                }
                 String title = String.valueOf(edtTitle.getText());
                 Long amount = Long.valueOf(String.valueOf(edtAmount.getText()));
                 String type = (String) spinJarType.getSelectedItem();
@@ -152,6 +159,8 @@ public class AddExpenseFragment extends BaseDialog implements AddExpenseMvpView 
         });
 
         mPresenter.onCheckAllEdtFilled();
+
+        getContext().sendBroadcast(new Intent(BaseActivity.ACTION_CHECK_CONNECTION));
     }
 
     @Override

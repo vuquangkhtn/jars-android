@@ -2,8 +2,12 @@ package com.example.vuquang.jars.activity.base;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.IntentFilter;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Handler;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vuquang.jars.R;
+import com.example.vuquang.jars.activity.app.ConnectivityChangeReceiver;
 import com.example.vuquang.jars.activity.utils.CommonUtils;
 import com.example.vuquang.jars.activity.utils.KeyboardUtils;
 import com.example.vuquang.jars.activity.utils.NetworkUtils;
@@ -23,8 +28,21 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 
 public class BaseActivity extends AppCompatActivity implements MvpView, BaseFragment.Callback {
+    public static final String ACTION_CHECK_CONNECTION = "action_check_connection";
+
     private ProgressDialog mProgressDialog;
     private boolean doubleBackToExitPressedOnce;
+
+    ConnectivityChangeReceiver receiver = new ConnectivityChangeReceiver();
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ACTION_CHECK_CONNECTION);
+        registerReceiver(receiver, filter);
+    }
+
     @Override
     public void showLoading() {
         hideLoading();
@@ -107,9 +125,15 @@ public class BaseActivity extends AppCompatActivity implements MvpView, BaseFrag
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
+    }
+
+    @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
+            finish();
             return;
         }
 

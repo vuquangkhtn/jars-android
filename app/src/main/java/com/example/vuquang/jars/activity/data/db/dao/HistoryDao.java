@@ -1,8 +1,8 @@
 package com.example.vuquang.jars.activity.data.db.dao;
 
-import com.example.vuquang.jars.activity.data.db.model.Expense;
 import com.example.vuquang.jars.activity.data.db.model.MonthlyHistory;
 import com.example.vuquang.jars.activity.utils.KeyPref;
+import com.example.vuquang.jars.activity.utils.NetworkUtils;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +30,7 @@ public class HistoryDao {
     }
 
     private String insertHistory(MonthlyHistory history) {
-        DatabaseReference historyEndPoint = mDatabase.child(KeyPref.HISTORY_KEY);
+        DatabaseReference historyEndPoint = getHistoriesEndPoint();
         String hisId = historyEndPoint.push().getKey();
         history.historyId = hisId;
         historyEndPoint.child(hisId).setValue(history);
@@ -38,8 +38,10 @@ public class HistoryDao {
     }
 
     public Task<Void> updateMonthlyIncome(String historyId, Long incomeVal) {
-        DatabaseReference historyEndPoint = mDatabase.child(KeyPref.HISTORY_KEY).child(historyId);
-        return historyEndPoint.child("monthlyIncome").setValue(incomeVal);
+        DatabaseReference historyEndPoint = getHistoriesEndPoint().child(historyId);
+        DatabaseReference incomeEndPoint = historyEndPoint.child("monthlyIncome");
+
+        return incomeEndPoint.setValue(incomeVal);
     }
 
     public String createHistory(long monthlyIncome) {
@@ -48,7 +50,7 @@ public class HistoryDao {
         return insertHistory(monthlyHistory);
     }
 
-    public DatabaseReference getHistoryEndPoint() {
+    public DatabaseReference getHistoriesEndPoint() {
         return mDatabase.child(KeyPref.HISTORY_KEY);
     }
 

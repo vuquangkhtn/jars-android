@@ -7,12 +7,12 @@ import android.widget.TextView;
 
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.app.JarsApp;
+import com.example.vuquang.jars.activity.base.BaseActivity;
 import com.example.vuquang.jars.activity.base.MvpView;
 import com.example.vuquang.jars.activity.data.AppDataManager;
 import com.example.vuquang.jars.activity.main.MainActivity;
 import com.example.vuquang.jars.activity.setting.settingdialog.SettingDialog;
 import com.example.vuquang.jars.activity.userlogin.login.LoginActivity;
-import com.example.vuquang.jars.activity.userlogin.NotAuthenAcitivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by VuQuang on 4/8/2018.
  */
 
-public class SplashScreenActivity extends NotAuthenAcitivity implements SplashMvpView {
+public class SplashScreenActivity extends BaseActivity implements SplashMvpView {
 
     private SplashPresenter<SplashMvpView> presenter;
 
@@ -50,7 +50,6 @@ public class SplashScreenActivity extends NotAuthenAcitivity implements SplashMv
     public void goToMain() {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
-        sendBroadcast(new Intent(NotAuthenAcitivity.ACTION_LOGIN));
         finish();
     }
 

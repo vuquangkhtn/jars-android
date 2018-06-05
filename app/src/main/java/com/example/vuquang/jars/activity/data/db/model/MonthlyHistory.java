@@ -4,6 +4,9 @@ import com.example.vuquang.jars.activity.app.JarsApp;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -49,18 +52,47 @@ public class MonthlyHistory {
     }
 
     public List<Expense> findExpensesListBy(JarType type) {
+        List<Expense> list;
         if(type == JarType.ALL) {
-            return new ArrayList<>(expenseList.values());
+            list = new ArrayList<>(expenseList.values());
         } else {
-            List<Expense> list = new ArrayList<>();
+            list = new ArrayList<>();
             for (Expense expense :
                     expenseList.values()) {
                 if(expense.calculateType() == type) {
                     list.add(expense);
                 }
             }
-            return list;
+
         }
+        Collections.sort(list, new Comparator<Expense>() {
+            @Override
+            public int compare(Expense expense1, Expense expense2) {
+                Calendar cal1 = Calendar.getInstance();
+                cal1.setTimeInMillis(expense1.getCreatedAt());
+
+                Calendar cal2 = Calendar.getInstance();
+                cal2.setTimeInMillis(expense2.getCreatedAt());
+
+                int isSameDate = cal2.get(Calendar.DATE) - cal1.get(Calendar.DATE);
+                if(isSameDate == 0) {
+                    int isSameHour = cal2.get(Calendar.HOUR) - cal1.get(Calendar.HOUR);
+                    if(isSameHour == 0) {
+                        int isSameMin = cal2.get(Calendar.MINUTE) - cal1.get(Calendar.MINUTE);
+                        if(isSameMin == 0) {
+                            return cal2.get(Calendar.SECOND) - cal1.get(Calendar.SECOND);
+                        } else {
+                            return isSameMin;
+                        }
+                    } else {
+                        return isSameHour;
+                    }
+                } else {
+                    return isSameDate;
+                }
+            }
+        });
+        return list;
     }
 
     public long calculateCurrentAmountBy(JarType type) {

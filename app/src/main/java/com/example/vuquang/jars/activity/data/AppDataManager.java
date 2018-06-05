@@ -18,6 +18,7 @@ public class AppDataManager extends AppDbHelper implements DataManager {
 
     public static AppDataManager getDataManager() {
         if(instance == null) {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
             instance = new AppDataManager(FirebaseDatabase.getInstance().getReference(),
                     FirebaseAuth.getInstance());
         }

@@ -1,6 +1,7 @@
 package com.example.vuquang.jars.activity.setting;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -14,9 +15,11 @@ import android.widget.EditText;
 
 import com.example.vuquang.jars.R;
 import com.example.vuquang.jars.activity.app.JarsApp;
+import com.example.vuquang.jars.activity.base.BaseActivity;
 import com.example.vuquang.jars.activity.base.BaseFragment;
 import com.example.vuquang.jars.activity.data.AppDataManager;
 import com.example.vuquang.jars.activity.statistics.StatisticsMvpView;
+import com.example.vuquang.jars.activity.utils.NetworkUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -50,6 +53,10 @@ public class SettingsFragment extends BaseFragment implements SettingMvpView {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!NetworkUtils.isNetworkConnected(getContext())) {
+                    getContext().sendBroadcast(new Intent(BaseActivity.ACTION_CHECK_CONNECTION));
+                    return;
+                }
                 mPresenter.onSaveIncomeClicked(Long.valueOf(String.valueOf(edtMonthlyIncome.getText())));
             }
         });
@@ -70,6 +77,7 @@ public class SettingsFragment extends BaseFragment implements SettingMvpView {
                 checkAllEdtFilled();
             }
         });
+        getContext().sendBroadcast(new Intent(BaseActivity.ACTION_CHECK_CONNECTION));
     }
 
     private void checkAllEdtFilled() {

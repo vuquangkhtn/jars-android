@@ -74,7 +74,7 @@ public class AppDbHelper implements DbHelper {
 
     @Override
     public DatabaseReference getHistoryEndPoint() {
-        return appDao.getHistoryDao().getHistoryEndPoint();
+        return appDao.getHistoryDao().getHistoriesEndPoint();
     }
 
     @Override
