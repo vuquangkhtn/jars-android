@@ -45,10 +45,7 @@ public class ExpensesFragment extends BaseFragment implements ExpenseMvpView {
         // Inflate the layout for this fragment
         View view = View.inflate(getActivity(), R.layout.fragment_expenses, null);
 //        View viewContainer = view.findViewById(R.id.layout_container_rv);
-        mPresenter = new ExpensePresenter<>(new AppDataManager(
-                FirebaseDatabase.getInstance().getReference(),
-                FirebaseAuth.getInstance()
-        ));
+        mPresenter = new ExpensePresenter<>(AppDataManager.getDataManager());
 
         mPresenter.onAttach(ExpensesFragment.this);
         return view;

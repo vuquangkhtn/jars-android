@@ -47,10 +47,7 @@ public class StatisticsFragment extends BaseFragment implements StatisticsMvpVie
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_statistics, container, false);
-        mPresenter = new StatisticsPresenter<>(new AppDataManager(
-                FirebaseDatabase.getInstance().getReference(),
-                FirebaseAuth.getInstance()
-        ));
+        mPresenter = new StatisticsPresenter<>(AppDataManager.getDataManager());
 
         mPresenter.onAttach(this);
         return view;

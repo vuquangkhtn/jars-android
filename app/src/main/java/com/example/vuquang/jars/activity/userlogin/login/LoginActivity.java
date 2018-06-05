@@ -42,10 +42,7 @@ public class LoginActivity extends BaseActivity implements LoginMvpView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        presenter = new LoginPresenter<>(new AppDataManager(
-                FirebaseDatabase.getInstance().getReference(),
-                FirebaseAuth.getInstance()
-        ));
+        presenter = new LoginPresenter<>(AppDataManager.getDataManager());
 
         mEdtPassword = (EditText) findViewById(R.id.edt_password);
         mEdtPassword.addTextChangedListener(new TextWatcher() {

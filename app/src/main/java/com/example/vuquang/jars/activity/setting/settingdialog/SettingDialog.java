@@ -57,10 +57,7 @@ public class SettingDialog extends BaseDialog implements SettingDialogMvpView {
                              Bundle savedInstanceState) {
         View view = View.inflate(getActivity(), R.layout.dialog_setting, null);
 
-        mPresenter = new SettingDialogPresenter<>(new AppDataManager(
-                FirebaseDatabase.getInstance().getReference(),
-                FirebaseAuth.getInstance()
-        ));
+        mPresenter = new SettingDialogPresenter<>(AppDataManager.getDataManager());
 
         mPresenter.onAttach(SettingDialog.this);
         return view;

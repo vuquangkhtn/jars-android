@@ -35,10 +35,7 @@ public class SettingsFragment extends BaseFragment implements SettingMvpView {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = View.inflate(getActivity(), R.layout.fragment_settings, null);
-        mPresenter = new SettingPresenter<>(new AppDataManager(
-                FirebaseDatabase.getInstance().getReference(),
-                FirebaseAuth.getInstance()
-        ));
+        mPresenter = new SettingPresenter<>(AppDataManager.getDataManager());
 
         mPresenter.onAttach(this);
         return view;

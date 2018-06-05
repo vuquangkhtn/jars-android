@@ -72,10 +72,7 @@ public class AddExpenseFragment extends BaseDialog implements AddExpenseMvpView 
                              Bundle savedInstanceState) {
         View view = View.inflate(getActivity(), R.layout.dialog_add_expense, null);
 
-        mPresenter = new AddExpensePresenter<>(new AppDataManager(
-                FirebaseDatabase.getInstance().getReference(),
-                FirebaseAuth.getInstance()
-        ));
+        mPresenter = new AddExpensePresenter<>(AppDataManager.getDataManager());
 
         mPresenter.onAttach(AddExpenseFragment.this);
         return view;

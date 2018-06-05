@@ -46,10 +46,7 @@ public class SignUpActivity extends BaseActivity implements SignUpMvpView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_acc);
 
-        mPresenter = new SignUpPresenter(new AppDataManager(
-                FirebaseDatabase.getInstance().getReference(),
-                FirebaseAuth.getInstance()
-        ));
+        mPresenter = new SignUpPresenter(AppDataManager.getDataManager());
 
         mPresenter.onAttach(SignUpActivity.this);
 

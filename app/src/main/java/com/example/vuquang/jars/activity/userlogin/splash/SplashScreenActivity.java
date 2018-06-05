@@ -34,9 +34,7 @@ public class SplashScreenActivity extends NotAuthenAcitivity implements SplashMv
         tvLogo = findViewById(R.id.tv_logo);
         tvLogo.setTypeface(JarsApp.getApp().getTypeFace("fonts/atvice.ttf"));
 
-        presenter = new SplashPresenter<>(new AppDataManager(
-                FirebaseDatabase.getInstance().getReference(),
-                FirebaseAuth.getInstance()));
+        presenter = new SplashPresenter<>(AppDataManager.getDataManager());
         presenter.onAttach(SplashScreenActivity.this);
         presenter.decideNextActivity();
     }
