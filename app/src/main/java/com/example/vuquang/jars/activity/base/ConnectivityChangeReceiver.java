@@ -1,4 +1,4 @@
-package com.example.vuquang.jars.activity.app;
+package com.example.vuquang.jars.activity.base;
 
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;

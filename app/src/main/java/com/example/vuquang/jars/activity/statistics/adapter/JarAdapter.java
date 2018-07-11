@@ -1,6 +1,7 @@
 package com.example.vuquang.jars.activity.statistics.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,8 +42,13 @@ public class JarAdapter extends RecyclerView.Adapter<JarAdapter.JarHolder> {
         holder.imvIcon.setImageResource(type.getResIdIcon());
         String name = type.getName();
         holder.tvName.setText(name);
-        holder.tvAmount.setText(String.valueOf(mHistory.calculateCurrentAmountBy(type) + " / "
-                + String.valueOf(mHistory.calculateTotalIncomeBy(type))));
+        long curAmount = mHistory.calculateCurrentAmountBy(type);
+        long totalIncome = mHistory.calculateTotalIncomeBy(type);
+        if(curAmount > totalIncome) {
+            holder.tvAmount.setTextColor(Color.RED);
+        }
+        holder.tvAmount.setText(String.valueOf(curAmount + " / "
+                + totalIncome));
     }
 
     @Override

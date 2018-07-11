@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 
 import com.example.vuquang.jars.activity.data.db.model.MonthlyHistory;
 import com.example.vuquang.jars.activity.userlogin.login.LoginActivity;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -24,6 +25,8 @@ public class JarsApp extends Application{
     public void onCreate() {
         super.onCreate();
         instance = this;
+
+        FirebaseApp.initializeApp(this);
     }
 
     public static JarsApp getApp() {
